@@ -8,7 +8,7 @@ def reverse(arg):
 
 # Создать функцию, которая принимает список слов и возвращает среднюю длину слов в списке.
 
-def avg_len(arg):
+def avglen(arg):
     sum = 0
     for v in arg:
         sum += len(v)
@@ -17,7 +17,7 @@ def avg_len(arg):
 # Создать функицию, которая принимает список слов и возвращает словарь,
 # в котором заданы порядковые номера слов в списке.
 
-def make_dict(arg):
+def index(arg):
     result = {}
     for i, v in enumerate(arg):
         if v not in result.keys():
@@ -28,7 +28,7 @@ def make_dict(arg):
 
 # Создать функцию, которая принимает два списка и возвращает список из совпадающих элементов (порядок не важен)
 
-def XOR(arg1, arg2):
+def coincidence(arg1, arg2):
     result = []
     for v in arg1:
         if v not in result:
@@ -39,7 +39,7 @@ def XOR(arg1, arg2):
 # Создать функицию, которая принимает список слов и возвращает словарь, в котором указано количество раз,
 # которое то или иное слово встречается.
 
-def count_rep(arg):
+def count(arg):
     result = {}
     for i in arg:
         if i not in result.keys():
@@ -51,7 +51,7 @@ def count_rep(arg):
 # Создать функцию, которая принимает список слов и возвращает список в котором эти слова отсортированы по длине.
 # Для слов одинаковой длины, их порядок в результирующем списке не важен.
 
-def len_sort(arg):
+def lensort(arg):
     result = arg
     l = len(result)
     for i in range(l - 1):
