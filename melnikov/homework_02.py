@@ -4,11 +4,13 @@ def reverse(arg):
         result.insert(0, v)
     return result
 
+
 def avglen(arg):
-    sum = 0
+    amount = 0
     for v in arg:
-        sum += len(v)
-    return sum / len(arg)
+        amount += len(v)
+    return amount / len(arg)
+
 
 def index(arg):
     result = {}
@@ -19,6 +21,7 @@ def index(arg):
             result[v].append(i)
     return result
 
+
 def coincidence(arg1, arg2):
     result = []
     for v in arg1:
@@ -26,6 +29,7 @@ def coincidence(arg1, arg2):
             if v in arg2:
                 result.append(v)
     return result
+
 
 def count(arg):
     result = {}
@@ -36,11 +40,12 @@ def count(arg):
             result[i] += 1
     return result
 
+
 def lensort(arg):
     result = arg
-    l = len(result)
-    for i in range(l - 1):
-        for j in range(l - i - 1):
+    length = len(result)
+    for i in range(length - 1):
+        for j in range(length - i - 1):
             if len(result[j]) > len(result[j + 1]):
                 copy = result[j]
                 result[j] = result[j + 1]
