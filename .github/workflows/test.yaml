@@ -1,0 +1,29 @@
+name: tests
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  pytest:
+    name: Pytest tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup python 3
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+      - name: Install testing tools
+        run: |
+          pip install pylama
+          pip install pytest
+      - name: Checkout source code
+        uses: actions/checkout@v3
+      - name: Run lint
+        run: |
+          pylama ./
+      - name: Run pytest
+        run: |
+          pytest -s tests
