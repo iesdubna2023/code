@@ -19,6 +19,10 @@ def index(arg):
             result[v] = [i]
         else:
             result[v].append(i)
+    for i in result.keys():
+        if len(result[i]) == 1:
+            copy = result[i][0]
+            result[i] = copy
     return result
 
 
