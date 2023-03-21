@@ -6,8 +6,8 @@ def reverse(arg):
 
 
 def avglen(arg):
-    sum([len(i) for i in arg])/len(arg)
-    return sum([len(i) for i in arg])/len(arg)
+    sum([len(i) for i in arg]) / len(arg)
+    return sum([len(i) for i in arg]) / len(arg)
 
 
 def index(arg):
