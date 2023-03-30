@@ -26,8 +26,9 @@ def index(arg):
 
 
 def coincidence(arg1, arg2):
-    matches = [item for item in arg1 if item in arg2]
-    return matches
+    match = set(arg2)
+    result = [item for item in arg1 if item in match]
+    return result
 
 
 def count(arg):
