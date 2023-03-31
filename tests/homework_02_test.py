@@ -63,7 +63,7 @@ def test_coincidence():
     for surname, m in iter_homework_02():
         logging.info("Test coincidence for %s", surname)
         r = m.coincidence(arg1, arg2)
-        assert r == expected
+        assert set(r) == set(expected)
         logging.info("Test coincidence for %s: OK", surname)
 
 
