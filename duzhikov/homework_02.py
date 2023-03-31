@@ -4,14 +4,10 @@ def reverse_list(lst):
     return lst[::-1]
 
 
-
-
 arg2 = ["a", "ab", "abc"]
 # result = 2.0
 def average_word_length(lst):
     return sum(len(word) for word in lst) / len(lst)
-
-
 
 
 arg3 = ["her", "name", "is", "Masha", "Masha", "is", "a", "sister", "of", "Zhenya"]
@@ -34,15 +30,11 @@ def index_words(lst):
     return {k: v[0] if len(v) == 1 else v for k, v in indexes.items()}
 
 
-
-
 arg4_1 = ["my", "name", "is", "Masha"]
 arg4_2 = ["my", "name", "is", "Zhenya"]
 # result = ["my", "name", "is"]
 def intersect_lists(lst1, lst2):
     return list(set(lst1) & set(lst2))
-
-
 
 
 arg5 = ["aaa", "aaa", "bbb", "ccc", "bbb"]
@@ -57,14 +49,10 @@ def count_words(lst):
     return dict(Counter(lst))
 
 
-
-
 arg6 = ["abcd", "a", "ab", "abc", "bazinga", "bar"]
 # result = ["a", "ab", "abc", "bar", "abcd", "bazinga"]
 def sort_by_length(lst):
     return sorted(lst, key=len)
-
-
 
 
 print(reverse_list(arg1))
