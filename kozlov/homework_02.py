@@ -14,7 +14,7 @@ def avglen(array):
         a = len(array[i])
         s += a
         k += 1
-    return s/k
+    return s / k
 
 
 def index(array):
