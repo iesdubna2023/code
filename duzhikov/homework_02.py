@@ -1,38 +1,37 @@
-def reverse_list(lst):
+from collections import defaultdict
+from collections import Counter
+
+
+def reverse(lst):
     return lst[::-1]
 
 
-def average_word_length(lst):
+def avglen(lst):
     return sum(len(word) for word in lst) / len(lst)
 
 
-from collections import defaultdict
-
-def index_words(lst):
+def index(lst):
     indexes = defaultdict(list)
     for i, word in enumerate(lst):
         indexes[word].append(i)
     return {k: v[0] if len(v) == 1 else v for k, v in indexes.items()}
 
 
-def intersect_lists(lst1, lst2):
+def coincidence(lst1, lst2):
     return list(set(lst1) & set(lst2))
 
 
-from collections import Counter
-
-def count_words(lst):
+def count(lst):
     return dict(Counter(lst))
 
 
-def sorted_by_Dimasik(list):
-    len_list = len(list)
+def lensort(fix):
+    len_list = len(fix)
     for i in range(1, len_list):
-        data = list[i]
-        count = i - 1
-        while count >= 0 and len(data) < len(list[count]):
-            list[count + 1] = list[count]
-            count -= 1
-        list[count + 1] = data
-    return (list)
-
+        data = fix[i]
+        c = i - 1
+        while c >= 0 and len(data) < len(fix[c]):
+            fix[c + 1] = fix[c]
+            c -= 1
+        fix[c + 1] = data
+    return fix
