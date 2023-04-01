@@ -69,6 +69,3 @@ print(index_words(arg3))
 print(intersect_lists(arg4_1, arg4_2))
 print(count_words(arg5))
 print(sorted_by_Dimasik(arg6))
-
-
-#переделал!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
