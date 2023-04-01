@@ -82,11 +82,11 @@ def test_count():
 
 
 def test_lensort():
-    arg = ["abcd", "a", "ab", "abc", "bazinga", "bar"]
-    expected = ["a", "ab", "abc", "bar", "abcd", "bazinga"]
-    expected2 = ["a", "ab", "bar", "abc", "abcd", "bazinga"]
     for surname, m in iter_homework_02():
         logging.info("Test lensort for %s", surname)
+        arg = ["abcd", "a", "ab", "abc", "bazinga", "bar"]
+        expected = ["a", "ab", "abc", "bar", "abcd", "bazinga"]
+        expected2 = ["a", "ab", "bar", "abc", "abcd", "bazinga"]
         r = m.lensort(arg)
         assert r == expected or r == expected2
         logging.info("Test lensort for %s: OK", surname)
