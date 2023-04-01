@@ -9,7 +9,6 @@ arg2 = ["a", "ab", "abc"]
 def average_word_length(lst):
     return sum(len(word) for word in lst) / len(lst)
 
-
 arg3 = ["her", "name", "is", "Masha", "Masha", "is", "a", "sister", "of", "Zhenya"]
 # result = {
 #     "her": 0,
