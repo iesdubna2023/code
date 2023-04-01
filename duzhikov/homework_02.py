@@ -51,8 +51,16 @@ def count_words(lst):
 
 arg6 = ["abcd", "a", "ab", "abc", "bazinga", "bar"]
 # result = ["a", "ab", "abc", "bar", "abcd", "bazinga"]
-def sort_by_length(lst):
-    return sorted(lst, key=len)
+def sorted_by_Dimasik(list):
+    len_list = len(list)
+    for i in range(1, len_list):
+        data = list[i]
+        j = i - 1
+        while j >= 0 and len(data) < len(list[j]):
+            list[j + 1] = list[j]
+            j -= 1
+        list[j + 1] = data
+    return (list)
 
 
 print(reverse_list(arg1))
@@ -60,4 +68,4 @@ print(average_word_length(arg2))
 print(index_words(arg3))
 print(intersect_lists(arg4_1, arg4_2))
 print(count_words(arg5))
-print(sort_by_length(arg6))
+print(sorted_by_Dimasik(arg6))
