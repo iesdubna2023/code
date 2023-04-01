@@ -62,7 +62,6 @@ def sorted_by_Dimasik(list):
         list[count + 1] = data
     return (list)
 
-
 print(reverse_list(arg1))
 print(average_word_length(arg2))
 print(index_words(arg3))
