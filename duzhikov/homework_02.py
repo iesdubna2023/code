@@ -55,11 +55,11 @@ def sorted_by_Dimasik(list):
     len_list = len(list)
     for i in range(1, len_list):
         data = list[i]
-        j = i - 1
-        while j >= 0 and len(data) < len(list[j]):
-            list[j + 1] = list[j]
-            j -= 1
-        list[j + 1] = data
+        count = i - 1
+        while count >= 0 and len(data) < len(list[count]):
+            list[count + 1] = list[count]
+            count -= 1
+        list[count + 1] = data
     return (list)
 
 
