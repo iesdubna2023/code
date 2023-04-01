@@ -1,7 +1,3 @@
-from collections import defaultdict
-from collections import Counter
-
-
 def reverse(lst):
     return lst[::-1]
 
@@ -11,10 +7,17 @@ def avglen(lst):
 
 
 def index(lst):
-    indexes = defaultdict(list)
-    for i, word in enumerate(lst):
-        indexes[word].append(i)
-    return {k: v[0] if len(v) == 1 else v for k, v in indexes.items()}
+    result = {}
+    for i in range(len(lst)):
+        word = lst[i]
+        if word not in result:
+            result[word] = i
+        else:
+            if isinstance(result[word], list):
+                result[word].append(i)
+            else:
+                result[word] = [result[word], i]
+    return result
 
 
 def coincidence(lst1, lst2):
@@ -22,16 +25,22 @@ def coincidence(lst1, lst2):
 
 
 def count(lst):
-    return dict(Counter(lst))
+    result_dict = {}
+    for word in lst:
+        if word in result_dict:
+            result_dict[word] += 1
+        else:
+            result_dict[word] = 1
+    return result_dict
 
 
-def lensort(fix):
-    len_list = len(fix)
+def lensort(lst):
+    len_list = len(lst)
     for i in range(1, len_list):
-        data = fix[i]
+        data = lst[i]
         c = i - 1
-        while c >= 0 and len(data) < len(fix[c]):
-            fix[c + 1] = fix[c]
+        while c >= 0 and len(data) < len(lst[c]):
+            lst[c + 1] = lst[c]
             c -= 1
-        fix[c + 1] = data
-    return fix
+        lst[c + 1] = data
+    return lst
