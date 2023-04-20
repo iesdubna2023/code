@@ -65,7 +65,7 @@ class Segment2D(Figure2D):
                         return self.point_1.y < point.y < self.point_2.y
 
     def len(self):
-        return ((self.point_1.x - self.point_2.x) ** 2 + \
+        return ((self.point_1.x - self.point_2.x) ** 2 +
                 (self.point_1.y - self.point_2.y) ** 2) ** 0.5
 
 
