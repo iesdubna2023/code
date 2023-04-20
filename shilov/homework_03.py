@@ -31,14 +31,21 @@ class Point2D(Figure2D):
         shiftb_x = segment.p1.x - segment.p2.x
         shiftb_y = segment.p1.y - segment.p2.y
         if shiftb_x == 0:
-            mirror_result = Point2D(-self.x, self.y)
+            mirror_result = Point2D(-shiftp_x + segment.p2.x,
+                                    shiftp_y + segment.p2.y)
         elif shiftb_y == 0:
-            mirror_result = Point2D(self.x, -self.y)
+            mirror_result = Point2D(shiftp_x + segment.p2.x,
+                                    -shiftp_y + segment.p2.y)
         else:
-            a = complex(shiftp_x / shiftb_x, shiftp_y / shiftb_y)
-            a.conjugate()
-            x = a.imag * shiftb_x + segment.p2.x
-            y = a.real * shiftb_y + segment.p2.y
+            len_AB = math.sqrt((shiftb_x) ** 2 + (shiftb_y) ** 2)
+            cos = shiftb_x / len_AB
+            sin = shiftb_y / len_AB
+            turn_p_x = shiftp_x * cos + shiftp_y * sin
+            turn_p_y = -shiftp_x * sin + shiftp_y * cos
+            a = complex(turn_p_x, turn_p_y)
+            c = a.conjugate()
+            x = c.real * cos - c.imag * sin + segment.p2.x
+            y = c.real * sin + c.imag * cos + segment.p2.y
             mirror_result = Point2D(x, y)
         return mirror_result
 
