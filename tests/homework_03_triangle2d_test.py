@@ -43,8 +43,8 @@ def test_triangle2d_belongs_point(iter_homework):
     for surname, m in iter_homework(3):
         logging.info("Test Triangle2D.belongs_point for %s", surname)
         t = m.Triangle2D(m.Point2D(1, 1), m.Point2D(2, 1), m.Point2D(1, 2))
-        bp1 = m.Point2D(0.2, 0.2)
-        bp2 = m.Point2D(1, 1)
+        bp1 = m.Point2D(1.5, 1.1)
+        bp2 = m.Point2D(0, 0)
         assert t.belongs_point(bp1)
         assert not t.belongs_point(bp2)
         logging.info("Test Triangle2D.belongs_point for %s: OK", surname)
