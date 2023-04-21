@@ -5,14 +5,12 @@ def task1(list):
         reversed_lst.append(list[i])
     return reversed_lst
 
-
 arg2 = ["a", "ab", "abc"]
 def task2(list):
     total_length = 0
     for word in list:
         total_length += len(word)
     return total_length / len(list)
-
 
 arg3 = ["her", "name", "is", "Masha", "Masha", "is", "a", "sister", "of", "Zhenya"]
 def task3(arg):
@@ -27,7 +25,6 @@ def task3(arg):
             indexes[word] = i
     return indexes
 
-
 arg4_1 = ["my", "name", "is", "Masha"]
 arg4_2 = ["my", "name", "is", "Zhenya"]
 def task4(list1, list2):
@@ -36,7 +33,6 @@ def task4(list1, list2):
         if elem in list2 and elem not in intersect:
             intersect.append(elem)
     return intersect
-
 
 arg5 = ["aaa", "aaa", "bbb", "ccc", "bbb"]
 def task5(list):
@@ -47,7 +43,6 @@ def task5(list):
         else:
             counts[word] = 1
     return counts
-
 
 arg6 = ["abcd", "a", "ab", "abc", "bazinga", "bar"]
 def task6(list):
@@ -62,8 +57,6 @@ def task6(list):
         if not inserted:
             sorted_list.append(word)
     return sorted_list
-
-
 
 print(task1(arg1))
 print(task2(arg2))
