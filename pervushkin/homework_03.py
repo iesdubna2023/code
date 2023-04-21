@@ -14,7 +14,7 @@ class Point2D(Figure2D):
         self.x, self.y = x, y
 
     def __str__(self):
-        return "x = {1}, y = {0}".format(self.x, self.y)
+        return "x = {0}, y = {1}".format(self.x, self.y)
 
     def area(self):
         return 0
