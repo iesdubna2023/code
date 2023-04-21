@@ -45,11 +45,11 @@ class Segment2D(Figure2D):
                          self.p2.mirror_point(point))
 
     def mirror_line(self, point1, point2):
-        return Segment2D(self.p1.mirror_line(point1, point2), 
+        return Segment2D(self.p1.mirror_line(point1, point2),
                          self.p2.mirror_line(point1, point2))
 
     def belongs_point(self, pb):
-        return ((pb.x - self.p1.x)
+        return ((pb.x - self.p1.x) 
                 * (self.p2.y - self.p1.y)
                 - (self.p2.x - self.p1.x)
                 * (pb.y - self.p1.y) == 0
@@ -70,13 +70,13 @@ class Triangle2D(Figure2D):
         return abs((x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2)) / 2)
 
     def mirror_point(self, point):
-        return Triangle2D(self.p1.mirror_point(point), 
-                          self.p2.mirror_point(point), 
+        return Triangle2D(self.p1.mirror_point(point),
+                          self.p2.mirror_point(point),
                           self.p3.mirror_point(point))
 
     def mirror_line(self, point1, point2):
-        return Triangle2D(self.p1.mirror_line(point1, point2), 
-                          self.p2.mirror_line(point1, point2), 
+        return Triangle2D(self.p1.mirror_line(point1, point2),
+                          self.p2.mirror_line(point1, point2),
                           self.p3.mirror_line(point1, point2))
 
     def belongs_point(self, point):
@@ -84,7 +84,11 @@ class Triangle2D(Figure2D):
         x1, y1 = self.p1.x, self.p1.y
         x2, y2 = self.p2.x, self.p2.y
         x3, y3 = self.p3.x, self.p3.y
-        a = ((y2 - y3) * (x - x3) + (x3 - x2) * (y - y3)) / ((y2 - y3) * (x1 - x3) + (x3 - x2) * (y1 - y3))
-        b = ((y3 - y1) * (x - x3) + (x1 - x3) * (y - y3)) / ((y2 - y3) * (x1 - x3) + (x3 - x2) * (y1 - y3))
+        a = ((y2 - y3) * (x - x3)
+             + (x3 - x2) * (y - y3)) / ((y2 - y3) * (x1 - x3)
+                                        + (x3 - x2) * (y1 - y3))
+        b = ((y3 - y1) * (x - x3)
+             + (x1 - x3) * (y - y3)) / ((y2 - y3) * (x1 - x3)
+                                        + (x3 - x2) * (y1 - y3))
         c = 1 - a - b
         return 0 <= a <= 1 and 0 <= b <= 1 and 0 <= c <= 1
