@@ -2,9 +2,6 @@ import math
 
 
 class Figure2D:
-    def __init__(self, array):
-        self.points = array
-
     def area(self):
         if int(len(self.points)) <= 2:
             return 0
