@@ -91,13 +91,13 @@ class Segment2D(Figure2D):
         x2, y2 = self.points[0].points[0][0], self.points[0].points[0][1]
         x3, y3 = self.points[1].points[0][0], self.points[1].points[0][1]
 
-        answer = (x2 == x3 and x2 == x1 and min(y2, y3)<= y1 <=max(y2, y3))
+        answer = (x2 == x3 and x2 == x1 and min(y2, y3) <= y1 <= max(y2, y3))
         if not answer:
-            answer = (y2 == y3 and y2 == y1 and min(x2, x3)<= x1 <=max(x2, x3))
+            answer = (y2 == y3 and y2 == y1 and min(x2, x3) <= x1 <= max(x2, x3))
         if not answer:
-            a = y2-y3
-            b = x3-x2
-            c = x2y3 - x3y2
+            a = y2 - y3
+            b = x3 - x2
+            c = x2 * y3 - x3 * y2
             answer = (a * x1 + b * y1 + c == 0)
         return answer
 
