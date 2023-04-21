@@ -81,7 +81,8 @@ class Point2D(Figure2D):
 
 class Segment2D(Figure2D):
     def __init__(self, p1, p2):
-        self.points = [p1, p2]
+        self.p1 = p1
+        self.p2 = p2
 
     def belongs_point(self, figure):
         x1, y1 = super().belongs_point(figure)
@@ -102,13 +103,14 @@ class Segment2D(Figure2D):
 
 
 class Triangle2D(Figure2D):
-    def __init__(self, x1, y1, x2, y2, x3, y3):
-        self.points = [[x1, y1], [x2, y2], [x3, y3]]
-
+    def init(self, p1, p2, p3):
+        self.p1 = p1
+        self.p2 = p2
+        self.p3 = p3
     def belongs_point(self, figure):
         x, y = super().belongs_point(figure)
-        xp = (self.points[0][0], self.points[1][0], self.points[2][0])
-        yp = (self.points[0][1], self.points[1][1], self.points[2][1])
+        xp = (self.p1.x, self.p2.x, self.p3.x)
+        yp = (self.p1.y, self.p2.y, self.p3.y)
         answer = False
         for i in range(len(xp)):
             a = (yp[i] <= y and y < yp[i - 1])
