@@ -21,7 +21,7 @@ class Point2D(Figure2D):
 
     def belongs_point(self, point):
         return self.x == point.x and self.y == point.y
-    
+
     def mirror_line(self, line):
         p1 = line.p1
         p2 = line.p2
@@ -86,4 +86,4 @@ class Triangle2D(Figure2D):
         b = Triangle2D(self.p1, self.p3, point)
         c = Triangle2D(self.p2, self.p3, point)
         return not (a.area() + b.area() + c.area() > self.area())
-    
+
