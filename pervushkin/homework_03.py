@@ -1,3 +1,6 @@
+import math
+
+
 class Figure2D:
     def set_color(self, color):
         self._color = color
@@ -18,13 +21,16 @@ class Point2D(Figure2D):
         result_y = 2 * pm.y - self.y
         return Point2D(result_x, result_y)
 
+    # y = kx + b
     def mirror_line(self, line):
-        p1 = line.point_1
-        p2 = line.point_2
-        k = (p2.y - p1.y) / (p2.x - p1.x)
-        b = (p2.x * p1.y + p1.x * p2.y) / (p2.x - p1.x)
-        d = (self.x + (self.y - b) * k) / (1 + k ** 2)
-        return Point2D(2 * d - self.x, 2 * d * k - self.y + 2 * b)
+        n = Point2D(0, 0)
+        n.x = (line.point_1.x - line.point_2.x)
+        n.y = (line.point_1.y - line.point_2.y)
+        length = math.sqrt(n.x * n.x + n.y * n.y)
+        n.x /= length
+        n.y /= length
+        dot2 = 2 * (n.x * self.x + n.y * self.y)
+        return Point2D(self.x - dot2 * n.x, self.y - dot2 * n.y)
 
     def belongs_point(self, point):
         return self.x == point.x and self.y == point.y
@@ -35,34 +41,25 @@ class Segment2D(Figure2D):
         self.point_1 = point_1
         self.point_2 = point_2
 
+    @property
     def area(self):
         return 0
 
     def mirror_point(self, pm):
-        return Segment2D(self.point_1.mirror_point(pm), self.point_2.mirror_point(pm))
+        return Segment2D(self.point_1.mirror_point(pm),
+                         self.point_2.mirror_point(pm))
 
     def mirror_line(self, line):
-        return Segment2D(self.point_1.mirror_line(line), self.point_2.mirror_line(line))
+        return Segment2D(self.point_1.mirror_line(line),
+                         self.point_2.mirror_line(line))
 
     def belongs_point(self, point):
         if self.len() == 0:
             return 0
-        else:
-            line_check = (point.x - self.point_1.x)/(self.point_2.x - self.point_1.x) == \
-                         (point.y - self.point_1.y)/(self.point_2.y - self.point_1.y)
-            if line_check == 0:
-                return 0
-            else:
-                if self.point_1.x != self.point_2.x:
-                    if self.point_1.x > self.point_2.x:
-                        return self.point_2.x < point.x < self.point_1.x
-                    else:
-                        return self.point_1.x < point.x < self.point_2.x
-                else:
-                    if self.point_1.y > self.point_2.y:
-                        return self.point_2.y < point.y < self.point_1.y
-                    else:
-                        return self.point_1.y < point.y < self.point_2.y
+        return (abs(self.point_2.x - self.point_1.x) >=
+                abs(self.point_2.x-point.x) + abs(self.point_1.x - point.x)) \
+            and (abs(self.point_2.y - self.point_1.y) >=
+                 abs(self.point_2.y - point.y) + abs(self.point_1.y - point.y))
 
     def len(self):
         return ((self.point_1.x - self.point_2.x) ** 2 +
@@ -79,22 +76,23 @@ class Triangle2D(Figure2D):
         a = Segment2D(self.point_1, self.point_2).len()
         b = Segment2D(self.point_1, self.point_3).len()
         c = Segment2D(self.point_2, self.point_3).len()
-        if a < b + c and b < a + c and c < a + b:
+        if (a < b + c) and (b < a + c) and (c < a + b):
             p = (a + b + c) / 2
             return (p * (p - a) * (p - b) * (p - c)) ** 0.5
-        else:
-            return 0
+        return 0
 
     def mirror_point(self, pm):
-        return Triangle2D(self.point_1.mirror_point(pm), self.point_2.mirror_point(pm),
+        return Triangle2D(self.point_1.mirror_point(pm),
+                          self.point_2.mirror_point(pm),
                           self.point_3.mirror_point(pm))
 
     def mirror_line(self, line):
-        return Triangle2D(self.point_1.mirror_line(line), self.point_2.mirror_line(line),
+        return Triangle2D(self.point_1.mirror_line(line),
+                          self.point_2.mirror_line(line),
                           self.point_3.mirror_line(line))
 
     def belongs_point(self, point):
-        a = Triangle2D(self.point_1, self.point_2, point)
-        b = Triangle2D(self.point_1, self.point_3, point)
-        c = Triangle2D(self.point_2, self.point_3, point)
-        return not (a.area() + b.area() + c.area() > self.area())
+        t = Triangle2D(self.point_1, self.point_2, point)
+        t1 = Triangle2D(self.point_1, self.point_3, point)
+        t2 = Triangle2D(self.point_2, self.point_3, point)
+        return not (t.area() + t1.area() + t2.area() > self.area())
