@@ -55,7 +55,10 @@ class Segment2D(Figure2D):
         x, y = point
         d = (x - x1) * (y2 - y1) - (y - y1) * (x2 - x1)
         if d == 0:
-            return x1<=x<=x2 or x2<=x<=x1 and y1<=y<=y2 or y2<=y<=y1
+            return (x1 <= x <= x2
+                    or x2 <= x <= x1
+                    and y1 <= y <= y2
+                    or y2 <= y <= y1)
         return False
 
 
@@ -65,6 +68,7 @@ class Triangle2D(Figure2D):
         self._p2 = p2
         self._p3 = p3
 
+    #по формуле Герона
     def area(self):
         a = self._p1.distance_to(self._p2)
         b = self._p2.distance_to(self._p3)
