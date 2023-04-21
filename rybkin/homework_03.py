@@ -37,7 +37,8 @@ class Figure2D:
         if self._is_uniqueness_points(*points):
             if len(*points) == self.__max_points:
                 return list(*points)
-#            raise FigureError(f"Данная фигура не поддерживает {len(*points)} точек.")
+#            raise FigureError(f"Данная фигура не
+    #            поддерживает {len(*points)} точек.")
 
     def _is_uniqueness_points(self, points):
         """Проверяет точки на уникальность"""
@@ -251,14 +252,14 @@ class Triangle2D(Figure2D):
              + self.figure_points[2][1] * ny
              - x1 * nx - y1 * ny) * ny + y1
         refl_p1 = (self.figure_points[0][0]
-                   - 2*(proj_p1[0] - x1), self.figure_points[0][1]
-                   - 2*(proj_p1[1] - y1))
+                   - 2 * (proj_p1[0] - x1), self.figure_points[0][1]
+                   - 2 * (proj_p1[1] - y1))
         refl_p2 = (self.figure_points[1][0]
-                   - 2*(proj_p2[0] - x1), self.figure_points[1][1]
-                   - 2*(proj_p2[1] - y1))
+                   - 2 * (proj_p2[0] - x1), self.figure_points[1][1]
+                   - 2 * (proj_p2[1] - y1))
         refl_p3 = (self.figure_points[2][0]
-                   - 2*(proj_p3[0] - x1), self.figure_points[2][1]
-                   - 2*(proj_p3[1] - y1))
+                   - 2 * (proj_p3[0] - x1), self.figure_points[2][1]
+                   - 2 * (proj_p3[1] - y1))
         return Triangle2D(refl_p1, refl_p2, refl_p3)
 
     def belongs_point(self, point: Tuple[float, float]) -> bool:
