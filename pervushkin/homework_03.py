@@ -56,14 +56,16 @@ class Segment2D(Figure2D):
     def belongs_point(self, point):
         if self.len() == 0:
             return 0
-        return (abs(self.point_2.x - self.point_1.x) >=
-                abs(self.point_2.x-point.x) + abs(self.point_1.x - point.x)) \
-            and (abs(self.point_2.y - self.point_1.y) >=
-                 abs(self.point_2.y - point.y) + abs(self.point_1.y - point.y))
+        return (abs(self.point_2.x - self.point_1.x)
+                >= abs(self.point_2.x - point.x)
+                + abs(self.point_1.x - point.x)) \
+            and (abs(self.point_2.y - self.point_1.y)
+                 >= abs(self.point_2.y - point.y)
+                 + abs(self.point_1.y - point.y))
 
     def len(self):
-        return ((self.point_1.x - self.point_2.x) ** 2 +
-                (self.point_1.y - self.point_2.y) ** 2) ** 0.5
+        return ((self.point_1.x - self.point_2.x) ** 2
+                + (self.point_1.y - self.point_2.y) ** 2) ** 0.5
 
 
 class Triangle2D(Figure2D):
