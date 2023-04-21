@@ -52,20 +52,18 @@ class Segment2D(Figure2D):
             self.p2.mirror_line(line)
         )
 
-    def belongs_point(self, point):
-        x1, y1 = self.point1
-        x2, y2 = self.point2
-        x, y = point
-        d = (x - x1) * (y2 - y1) - (y - y1) * (x2 - x1)
-        if d == 0:
-            return (x1 <= x <= x2
-                    or x2 <= x <= x1
-                    and y1 <= y <= y2
-                    or y2 <= y <= y1)
+    def belongs_point(self, belong_point):
+        if ((belong_point.x - self.p1.x)
+                * (self.p2.y - self.p1.y)
+                - (self.p2.x - self.p1.x)
+                * (belong_point.y - self.p1.y) == 0
+                and (self.p1.x < belong_point.x < self.p2.x
+                     or self.p2.x < belong_point.x < self.p1.x)):
+            return True
         return False
 
 
-class Triangle2D(Figure2D):
+class Triangle2D():
     def init(self, p1, p2, p3):
         self._p1 = p1
         self._p2 = p2
@@ -78,17 +76,18 @@ class Triangle2D(Figure2D):
         p = (a + b + c) / 2
         return (p * (p - a) * (p - b) * (p - c)) ** 0.5
 
-    def mirror_point(self, point):
-        mp1 = self._p1.mirror_point(point)
-        mp2 = self._p2.mirror_point(point)
-        mp3 = self._p3.mirror_point(point)
-        return Triangle2D(mp1, mp2, mp3)
+    def mirror_point(self, pointm):
+        return Triangle2D(self._p1.mirror_point(pointm),
+                          self._p2.mirror_point(pointm),
+                          self._p3.mirror_point(pointm))
 
-    def mirror_line(self, line):
-        ml1 = self._p1.mirror_line(line)
-        ml2 = self._p2.mirror_line(line)
-        ml3 = self._p3.mirror_line(line)
-        return Triangle2D(ml1, ml2, ml3)
+    def mirror_line(self, mline):
+        ml1 = self._p1.mirror_line(mline)
+        ml2 = self._p2.mirror_line(mline)
+        ml3 = self._p3.mirror_line(mline)
+        return Triangle2D(self._p1.mirror_line(mline),
+                           self._p2.mirror_line(line),
+                           self._p3.mirror_line(mline))
 
     def belongs_point(self, point):
         v1 = self._p1.vector_to(self._p2)
