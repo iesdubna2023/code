@@ -46,7 +46,7 @@ class Segment2D(Figure2D):
         p2 = self.p2.mirror_point(point)
         return Segment2D(p1, p2)
 
-    def mirror_line(self, line):    
+    def mirror_line(self, line):
         return Segment2D(
             self.p1.mirror_line(line),
             self.p2.mirror_line(line)
