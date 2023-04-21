@@ -66,8 +66,8 @@ class Figure2D:
 
 
 class Point2D(Figure2D):
-    def __init__(self, p):
-        self.points = [p]
+    def __init__(self, x1, y1):
+        self.points = [[x1, y1]]
 
     def belongs_point(self, figure):
         # вызов одноименной функции из родительского класса для проверки фигуры
