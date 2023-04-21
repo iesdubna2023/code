@@ -55,7 +55,7 @@ class Segment2D(Figure2D):
         x, y = point
         d = (x - x1) * (y2 - y1) - (y - y1) * (x2 - x1)
         if d == 0:
-            return x1 <= x <= x2 or x2 <= x <= x1 and y1 <= y <= y2 or y2 <= y <= y1
+            return x1<=x<=x2 or x2<=x<=x1 and y1<=y<=y2 or y2<=y<=y1
         return False
 
 
