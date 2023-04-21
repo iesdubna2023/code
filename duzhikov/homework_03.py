@@ -98,10 +98,17 @@ class Triangle2D(Figure2D):
         return Triangle2D(self.p1.mirror_line(line), self.p2.mirror_line(line),
                           self.p3.mirror_line(line))
 
-    def belongs_point(self, p):
-        a = (self.p2.y - self.p3.y) * (p.x - self.p3.x) + (self.p3.x - self.p2.x) * (
-                p.y - self.p3.y)
-        b = (self.p3.y - self.p1.y) * (p.x - self.p3.x) + (self.p1.x - self.p3.x) * (
-                p.y - self.p3.y)
+    def belongs_point(self, point):
+        px = point.x
+        py = point.y
+        p3x = self.p3.x
+        p3y = self.p3.y
+        p2y = self.p2.y
+        p1y = self.p1.y
+        p1x = self.p1.x
+        p2x = self.p2.x
+        a = (p2y - p3y) * (px - p3x) + (p3x - p2x) * (py - p3y)
+        b = (p3y - p1y) * (px - p3x) + (p1x - p3x) * (py - p3y)
         c = 1 - a - b
         return 0 <= a <= 1 and 0 <= b <= 1 and 0 <= c <= 1
+
