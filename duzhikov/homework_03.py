@@ -51,14 +51,12 @@ class Segment2D(Figure2D):
         m = (p2.y - p1.y) / (p2.x - p1.x)
         b = p1.y - m * p1.x
 
-        start_x = (self.start_point.x +
-                   (2 * m * (self.start_point.y - b))) / (1 + m ** 2)
-        start_y = (2 * m * start_x) + \
-                  (2 * b) - self.start_point.y
-        end_x = (self.end_point.x +
-                 (2 * m * (self.end_point.y - b))) / (1 + m ** 2)
-        end_y = (2 * m * end_x) + \
-                (2 * b) - self.end_point.y
+        start_x = (self.start_point.x+(2*m*(self.start_point.y-b)))/(1+m**2)
+        start_y = (2*m*start_x) + \
+                  (2*b)-self.start_point.y
+        end_x = (self.end_point.x+(2*m*(self.end_point.y-b)))/(1+m**2)
+        end_y = (2*m*end_x) + \
+                (2*b)-self.end_point.y
 
         return Segment2D(Point2D(start_x, start_y), Point2D(end_x, end_y))
 
