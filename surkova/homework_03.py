@@ -29,18 +29,16 @@ class Point2D(Figure2D):
              + B.x * (A.y - B.y) * (A.y - self.y)
              - A.x * (A.y - B.y) * (B.y - self.y)
              ) / (
-                    (A.x - B.x) ** 2
-                    + (A.y - B.y) ** 2
-            )
+              (A.x - B.x) ** 2
+              + (A.y - B.y) ** 2)
         y = ((B.x ** 2) * A.y
              + (A.x ** 2) * B.y
              + B.x * self.x * (B.y - A.y)
              - A.x * (self.x * (B.y - A.y) + B.x * (B.y + A.y))
              + ((A.y - B.y) ** 2) * self.y
              ) / (
-                    (A.x - B.x) ** 2
-                    + (A.y - B.y) ** 2
-            )
+              (A.x - B.x) ** 2
+              + (A.y - B.y) ** 2)
         return Point2D(x, y)
 
     def mirror_line(self, line):
@@ -65,12 +63,11 @@ class Segment2D(Figure2D):
 
     def belongs_point(self, pm):
         ifa = 0 <= (pm.x - self.p1.x) * self.p2.x \
-              <= (self.p1.x - self.p2.x) ** 2
+            <= (self.p1.x - self.p2.x) ** 2
         ifb = 0 <= (pm.y - self.p1.y) * self.p2.y \
-              <= (self.p1.y - self.p2.y) ** 2
-        ifc = (pm.x - self.p1.x) * (self.p2.y - self.p1.y) \
-              - (self.p2.x - self.p1.x) * (
-                pm.y - self.p1.y) == 0
+            <= (self.p1.y - self.p2.y) ** 2
+        ifc = (pm.x - self.p1.x) * (self.p2.y - self.p1.y)
+        - (self.p2.x - self.p1.x) * (pm.y - self.p1.y) == 0
         return ifa and ifb and ifc
 
     def mirror_line(self, line):
@@ -85,9 +82,12 @@ class Triangle2D(Figure2D):
         self.p3 = point_3
 
     def area(self):
-        ab = ((self.p1.x - self.p2.x) ** 2 + (self.p1.y - self.p2.y) ** 2) ** 0.5
-        ac = ((self.p1.x - self.p3.x) ** 2 + (self.p1.y - self.p3.y) ** 2) ** 0.5
-        bc = ((self.p2.x - self.p3.x) ** 2 + (self.p2.y - self.p3.y) ** 2) ** 0.5
+        ab = ((self.p1.x - self.p2.x) ** 2
+              + (self.p1.y - self.p2.y) ** 2) ** 0.5
+        ac = ((self.p1.x - self.p3.x) ** 2
+              + (self.p1.y - self.p3.y) ** 2) ** 0.5
+        bc = ((self.p2.x - self.p3.x) ** 2
+              + (self.p2.y - self.p3.y) ** 2) ** 0.5
         p = (ab + ac + bc) / 2
         return (p * (p - ab) * (p - ac) * (p - bc)) ** 0.5
 
@@ -98,12 +98,12 @@ class Triangle2D(Figure2D):
         return Triangle2D(point_1_prime, point_2_prime, point_3_prime)
 
     def belongs_point(self, pm):
-        a = (self.p1.x - pm.x) * (self.p2.y - self.p1.y) - (self.p2.x - self.p1.x) * (
-                self.p1.y - pm.y)
-        b = (self.p2.x - pm.x) * (self.p3.y - self.p2.y) - (self.p3.x - self.p2.x) * (
-                self.p2.y - pm.y)
-        c = (self.p3.x - pm.x) * (self.p1.y - self.p3.y) - (self.p1.x - self.p3.x) * (
-                self.p3.y - pm.y)
+        a = (self.p1.x - pm.x) * (self.p2.y - self.p1.y)
+        - (self.p2.x - self.p1.x) * (self.p1.y - pm.y)
+        b = (self.p2.x - pm.x) * (self.p3.y - self.p2.y)
+        - (self.p3.x - self.p2.x) * (self.p2.y - pm.y)
+        c = (self.p3.x - pm.x) * (self.p1.y - self.p3.y)
+        - (self.p1.x - self.p3.x) * (self.p3.y - pm.y)
         return (a <= 0 and b <= 0 and c <= 0) or (a > 0 and b > 0 and c > 0)
 
     def mirror_line(self, line):
