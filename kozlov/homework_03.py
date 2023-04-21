@@ -56,9 +56,9 @@ class Figure2D:
         for i in range(0, len(self.points)):
             x3, y3 = self.points[i][0], self.points[i][1]
             x4 = round(((x2 - x1) * (y2 - y1) *
-                        (y3 - y1) + x1 * pow(y2 - y1, 2) +
-                        x3 * pow(x2 - x1, 2)) /
-                       (pow(y2 - y1, 2) + pow(x2 - x1, 2)))
+            (y3 - y1) + x1 * pow(y2 - y1, 2) +
+            x3 * pow(x2 - x1, 2)) /
+            (pow(y2 - y1, 2) + pow(x2 - x1, 2)))
             y4 = round((y2 - y1) * (x4 - x1) / (x2 - x1) + y1)
             self.points[i][0] = x4 + (x4 - x3)
             self.points[i][1] = y4 + (y4 - y3)
@@ -66,7 +66,8 @@ class Figure2D:
     def draw(self, color='black'):
         for i in range(0, len(self.points)):
             draw.line((self.points[i][0], self.points[i][1],
-                       self.points[(i + 1) % len(self.points)][0], self.points[(i + 1) % len(self.points)][1]),
+                       self.points[(i + 1) % len(self.points)][0],
+                       self.points[(i + 1) % len(self.points)][1]),
                       fill=color, width=1)
         im.save('image.jpg', quality=95)
 
@@ -75,7 +76,8 @@ class Figure2D:
             # проверка, что переданная фигура является объектом класса точки
             x1, y1 = figure.points[0][0], figure.points[0][1]
         elif (isinstance(figure, (tuple, list))) and len(
-                figure) == 2:  # проверка, что переданная фигура является набором координат
+                figure) == 2:
+            # проверка, что переданная фигура является набором координат
             x1, y1 = figure[0], figure[1]
         else:
             print("Передана не точка!")
@@ -103,11 +105,13 @@ class Segment2D(Figure2D):
 
     def belongs_point(self, figure):
         x1, y1 = super().belongs_point(figure)
-        x2, y2, x3, y3 = self.points[0][0], self.points[0][1], self.points[1][0], self.points[1][1]
+        x2, y2, x3, y3 = self.points[0][0], self.points[0][1], \
+            self.points[1][0], self.points[1][1]
 
         answer = (x2 == x3 and x2 == x1 and min(y2, y3) <= y1 <= max(y2, y3))
         if not answer:
-            answer = (y2 == y3 and y2 == y1 and min(x2, x3) <= x1 <= max(x2, x3))
+            answer = (y2 == y3 and y2 == y1 and
+                      min(x2, x3) <= x1 <= max(x2, x3))
         if not answer:
             a = y2 - y3
             b = x3 - x2
@@ -126,8 +130,10 @@ class Triangle2D(Figure2D):
         yp = (self.points[0][1], self.points[1][1], self.points[2][1])
         answer = False
         for i in range(len(xp)):
-            if (((yp[i] <= y and y < yp[i - 1]) or (yp[i - 1] <= y and y < yp[i])) and
-                    (x > (xp[i - 1] - xp[i]) * (y - yp[i]) / (yp[i - 1] - yp[i]) + xp[i])):
+            if (((yp[i] <= y and y < yp[i - 1]) or
+                (yp[i - 1] <= y and y < yp[i])) and
+                (x > (xp[i - 1] - xp[i]) * (y - yp[i]) /
+                (yp[i - 1] - yp[i]) + xp[i])):
                 answer = not answer
         return answer
 
