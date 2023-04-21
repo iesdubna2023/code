@@ -42,27 +42,37 @@ class Segment2D(Figure2D):
         return 0.0
 
     def mirror_point(self, point):
-        return Segment2D(self.start_point.mirror_point(point), self.end_point.mirror_point(point))
+        return Segment2D(
+            self.start_point.mirror_point(point),
+            self.end_point.mirror_point(point)
+        )
 
     def mirror_line(self, p1, p2):
         m = (p2.y - p1.y) / (p2.x - p1.x)
         b = p1.y - m * p1.x
 
-        start_x = (self.start_point.x + (2 * m * (self.start_point.y - b))) / (1 + m ** 2)
-        start_y = (2 * m * start_x) + (2 * b) - self.start_point.y
-        end_x = (self.end_point.x + (2 * m * (self.end_point.y - b))) / (1 + m ** 2)
-        end_y = (2 * m * end_x) + (2 * b) - self.end_point.y
+        start_x = (self.start_point.x +
+                   (2 * m * (self.start_point.y - b))) / (1 + m ** 2)
+        start_y = (2 * m * start_x) + \
+                  (2 * b) - self.start_point.y
+        end_x = (self.end_point.x +
+                 (2 * m * (self.end_point.y - b))) / (1 + m ** 2)
+        end_y = (2 * m * end_x) + \
+                (2 * b) - self.end_point.y
 
         return Segment2D(Point2D(start_x, start_y), Point2D(end_x, end_y))
 
     def belongs_point(self, point):
-        if point.x < min(self.start_point.x, self.end_point.x) or point.x > max(self.start_point.x, self.end_point.x):
+        if point.x < min(self.start_point.x, self.end_point.x) \
+                or point.x > max(self.start_point.x, self.end_point.x):
             return False
-        if point.y < min(self.start_point.y, self.end_point.y) or point.y > max(self.start_point.y, self.end_point.y):
+        if point.y < min(self.start_point.y, self.end_point.y) \
+                or point.y > max(self.start_point.y, self.end_point.y):
             return False
         a = self.end_point.y - self.start_point.y
         b = self.start_point.x - self.end_point.x
-        c = -self.start_point.y * (self.start_point.x - self.end_point.x) + self.start_point.x * (
+        c = -self.start_point.y * (self.start_point.x - self.end_point.x) \
+            + self.start_point.x * (
                     self.start_point.y - self.end_point.y)
         return abs(a * point.x + b * point.y + c) < 1e-9
 
@@ -81,17 +91,21 @@ class Triangle2D(Figure2D):
         return (s * (s - a) * (s - b) * (s - c)) ** 0.5
 
     def mirror_point(self, p):
-        return Triangle2D(self.p1.mirror_point(p), self.p2.mirror_point(p),
+        return Triangle2D(self.p1.mirror_point(p),
+                          self.p2.mirror_point(p),
                           self.p3.mirror_point(p))
 
     def mirror_line(self, line):
-        return Triangle2D(self.p1.mirror_line(line), self.p2.mirror_line(line),
+        return Triangle2D(self.p1.mirror_line(line),
+                          self.p2.mirror_line(line),
                           self.p3.mirror_line(line))
 
     def belongs_point(self, p):
-        a = (self.p2.y - self.p3.y) * (p.x - self.p3.x) + (self.p3.x - self.p2.x) * (
+        a = (self.p2.y - self.p3.y) * (p.x - self.p3.x) \
+            + (self.p3.x - self.p2.x) * (
                 p.y - self.p3.y)
-        b = (self.p3.y - self.p1.y) * (p.x - self.p3.x) + (self.p1.x - self.p3.x) * (
+        b = (self.p3.y - self.p1.y) * (p.x - self.p3.x) \
+            + (self.p1.x - self.p3.x) * (
                 p.y - self.p3.y)
         c = 1 - a - b
         return 0 <= a <= 1 and 0 <= b <= 1 and 0 <= c <= 1
