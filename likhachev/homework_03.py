@@ -68,7 +68,6 @@ class Triangle2D(Figure2D):
         self._p2 = p2
         self._p3 = p3
 
-    #по формуле Герона
     def area(self):
         a = self._p1.distance_to(self._p2)
         b = self._p2.distance_to(self._p3)
