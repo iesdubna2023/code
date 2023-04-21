@@ -5,6 +5,7 @@ class Figure2D:
     def get_color(self):
         return self._color
 
+
 class Point2D(Figure2D):
     def __init__(self, x, y):
         self.x = x
@@ -30,6 +31,7 @@ class Point2D(Figure2D):
     def belongs_point(self, point):
         return self.x == point.x and self.y == point.y
 
+
 class Segment2D(Figure2D):
     def __init__(self, p1, p2):
         self.p1 = p1
@@ -39,10 +41,12 @@ class Segment2D(Figure2D):
         return 0
 
     def mirror_point(self, point):
-        return Segment2D(self.p1.mirror_point(point), self.p2.mirror_point(point))
+        return Segment2D(self.p1.mirror_point(point), 
+                         self.p2.mirror_point(point))
 
     def mirror_line(self, point1, point2):
-        return Segment2D(self.p1.mirror_line(point1, point2), self.p2.mirror_line(point1, point2))
+        return Segment2D(self.p1.mirror_line(point1, point2), 
+                         self.p2.mirror_line(point1, point2))
 
     def belongs_point(self, pb):
         return ((pb.x - self.p1.x)
@@ -51,6 +55,7 @@ class Segment2D(Figure2D):
                 * (pb.y - self.p1.y) == 0
                 and (self.p1.x < pb.x < self.p2.x
                      or self.p2.x < pb.x < self.p1.x))
+
 
 class Triangle2D(Figure2D):
     def __init__(self, p1, p2, p3):
