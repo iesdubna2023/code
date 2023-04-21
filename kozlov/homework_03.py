@@ -88,9 +88,8 @@ class Segment2D(Figure2D):
 
     def belongs_point(self, figure):
         x1, y1 = super().belongs_point(figure)
-        x2, y2, x3, y3 = self.points[0].points[0][0], \
-            self.points[0].points[0][1], \
-            self.points[1].points[0][0], self.points[1].points[0][1]
+        x2, y2 = self.points[0].points[0][0], self.points[0].points[0][1]
+        x3, y3 = self.points[1].points[0][0], self.points[1].points[0][1]
 
         answer = (x2 == x3 and x2 == x1 and min(y2, y3)<= y1 <=max(y2, y3))
         if not answer:
