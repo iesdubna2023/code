@@ -14,11 +14,11 @@ class Figure2D:
         if int(len(self.points)) <= 2:
             return 0
         elif int(len(self.points)) == 3:
-            a = math.sqrt((self.points[1][0] - self.points[0][0]) ** 2 +
+            a = math.sqrt((self.points[1][0] - self.points[0][0]) ** 2 + \
                           (self.points[1][1] - self.points[0][1]) ** 2)
-            b = math.sqrt((self.points[2][0] - self.points[1][0]) ** 2 +
+            b = math.sqrt((self.points[2][0] - self.points[1][0]) ** 2 + \
                           (self.points[2][1] - self.points[1][1]) ** 2)
-            c = math.sqrt((self.points[0][0] - self.points[2][0]) ** 2 +
+            c = math.sqrt((self.points[0][0] - self.points[2][0]) ** 2 + \
                           (self.points[0][1] - self.points[2][1]) ** 2)
             p = (a + b + c) / 2
             S = math.sqrt(p * (p - a) * (p - b) * (p - c))
