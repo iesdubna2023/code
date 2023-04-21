@@ -55,10 +55,9 @@ class Figure2D:
             return
         for i in range(0, len(self.points)):
             x3, y3 = self.points[i][0], self.points[i][1]
-            x4 = round(((x2 - x1) * (y2 - y1) *
-            (y3 - y1) + x1 * pow(y2 - y1, 2) +
-            x3 * pow(x2 - x1, 2)) /
-            (pow(y2 - y1, 2) + pow(x2 - x1, 2)))
+            x4 = round(((x2 - x1) * (y2 - y1) * (y3 - y1) + x1 *
+                        pow(y2 - y1, 2) + x3 * pow(x2 - x1, 2)) /
+                       (pow(y2 - y1, 2) + pow(x2 - x1, 2)))
             y4 = round((y2 - y1) * (x4 - x1) / (x2 - x1) + y1)
             self.points[i][0] = x4 + (x4 - x3)
             self.points[i][1] = y4 + (y4 - y3)
