@@ -83,8 +83,8 @@ class Triangle2D():
 
     def mirror_line(self, mline):
         return Triangle2D(self._p1.mirror_line(mline),
-                           self._p2.mirror_line(mline),
-                           self._p3.mirror_line(mline))
+                          self._p2.mirror_line(mline),
+                          self._p3.mirror_line(mline))
 
     def belongs_point(self, point):
         v1 = self._p1.vector_to(self._p2)
