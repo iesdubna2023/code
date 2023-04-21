@@ -82,11 +82,8 @@ class Triangle2D():
                           self._p3.mirror_point(pointm))
 
     def mirror_line(self, mline):
-        ml1 = self._p1.mirror_line(mline)
-        ml2 = self._p2.mirror_line(mline)
-        ml3 = self._p3.mirror_line(mline)
         return Triangle2D(self._p1.mirror_line(mline),
-                           self._p2.mirror_line(line),
+                           self._p2.mirror_line(mline),
                            self._p3.mirror_line(mline))
 
     def belongs_point(self, point):
