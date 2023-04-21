@@ -66,7 +66,7 @@ class Figure2D:
 
 
 class Point2D(Figure2D):
-    def init(self, p):
+    def __init__(self, p):
         self.points = [p]
 
     def belongs_point(self, figure):
@@ -80,7 +80,7 @@ class Point2D(Figure2D):
 
 
 class Segment2D(Figure2D):
-    def init(self, p1, p2):
+    def __init__(self, p1, p2):
         self.points = [p1, p2]
 
     def belongs_point(self, figure):
