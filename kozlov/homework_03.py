@@ -107,6 +107,7 @@ class Triangle2D(Figure2D):
         self.p1 = p1
         self.p2 = p2
         self.p3 = p3
+
     def belongs_point(self, figure):
         x, y = super().belongs_point(figure)
         xp = (self.p1.x, self.p2.x, self.p3.x)
