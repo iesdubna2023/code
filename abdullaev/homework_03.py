@@ -75,10 +75,10 @@ class Triangle2D(Figure2D):
                           self.p3.mirror_point(p)
                           )
 
-    def mirror_line(self, l):
-        return Triangle2D(self.p1.mirror_line(l),
-                          self.p2.mirror_line(l),
-                          self.p3.mirror_line(l)
+    def mirror_line(self, l1):
+        return Triangle2D(self.p1.mirror_line(l1),
+                          self.p2.mirror_line(l1),
+                          self.p3.mirror_line(l1)
                           )
 
     def belongs_point(self, point):
