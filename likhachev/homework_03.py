@@ -63,7 +63,7 @@ class Segment2D(Figure2D):
         return False
 
 
-class Triangle2D():
+class Triangle2D(Figure2D):
     def init(self, p1, p2, p3):
         self._p1 = p1
         self._p2 = p2
