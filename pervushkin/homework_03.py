@@ -13,6 +13,9 @@ class Point2D(Figure2D):
     def __init__(self, x, y):
         self.x, self.y = x, y
 
+    def __str__(self):
+        return "x = {1}, y = {0}".format(self.x, self.y)
+
     def area(self):
         return 0
 
@@ -21,7 +24,6 @@ class Point2D(Figure2D):
         result_y = 2 * pm.y - self.y
         return Point2D(result_x, result_y)
 
-    # y = kx + b
     def mirror_line(self, line):
         n = Point2D(0, 0)
         n.x = (line.p1.x - line.p2.x)
@@ -41,7 +43,6 @@ class Segment2D(Figure2D):
         self.p1 = p1
         self.p2 = p2
 
-    @property
     def area(self):
         return 0
 
@@ -80,7 +81,7 @@ class Triangle2D(Figure2D):
         c = Segment2D(self.p2, self.p3).len()
         if (a < b + c) and (b < a + c) and (c < a + b):
             p = (a + b + c) / 2
-            return (p * (p - a) * (p - b) * (p - c)) ** 0.5
+            return round((p * (p - a) * (p - b) * (p - c)) ** 0.5, 10)
         return 0
 
     def mirror_point(self, pm):
@@ -97,4 +98,4 @@ class Triangle2D(Figure2D):
         t = Triangle2D(self.p1, self.p2, point)
         t1 = Triangle2D(self.p1, self.p3, point)
         t2 = Triangle2D(self.p2, self.p3, point)
-        return not (t.area() + t1.area() + t2.area() > self.area())
+        return (t.area() + t1.area() + t2.area()) <= self.area()
