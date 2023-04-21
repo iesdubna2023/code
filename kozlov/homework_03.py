@@ -31,7 +31,8 @@ class Figure2D:
             # проверка, что переданная фигура является объектом класса точки
             x1, y1 = figure.points[0][0], figure.points[0][1]
         elif (isinstance(figure, (tuple, list))) and len(
-                figure) == 2:  # проверка, что переданная фигура является набором координат
+                figure) == 2:
+            # проверка, что переданная фигура является набором координат
             x1, y1 = figure[0], figure[1]
         else:
             print("Передана не точка!")
@@ -54,9 +55,10 @@ class Figure2D:
             return
         for i in range(0, len(self.points)):
             x3, y3 = self.points[i][0], self.points[i][1]
-            x4 = round(((x2 - x1) * (y2 - y1) * (y3 - y1) + x1 * pow(y2 - y1, 2) +
-                        x3 * pow(x2 - x1, 2)) / (
-                        pow(y2 - y1, 2) + pow(x2 - x1, 2)))
+            x4 = round(((x2 - x1) * (y2 - y1) *
+                        (y3 - y1) + x1 * pow(y2 - y1, 2) +
+                        x3 * pow(x2 - x1, 2)) /
+                       (pow(y2 - y1, 2) + pow(x2 - x1, 2)))
             y4 = round((y2 - y1) * (x4 - x1) / (x2 - x1) + y1)
             self.points[i][0] = x4 + (x4 - x3)
             self.points[i][1] = y4 + (y4 - y3)
@@ -148,9 +150,9 @@ print("Triangle2D", triangle1.area())
 triangle1.mirror_point(point1)
 triangle1.draw(color='blue')
 
-###### mirror_line
+# mirror_line
 
-### Triangle
+# Triangle
 
 segment1 = Segment2D(230, 120, 450, 350)
 segment1.draw()
@@ -158,7 +160,7 @@ segment1.draw()
 triangle1.mirror_line(segment1)
 triangle1.draw(color='green')
 
-### Segment
+# Segment
 
 segment2 = Segment2D(160, 450, 170, 350)
 segment2.draw()
@@ -169,7 +171,7 @@ segment3.draw(color='red')
 segment3.mirror_line(segment2)
 segment3.draw(color='blue')
 
-### Point
+# Point
 
 segment4 = Segment2D(400, 400, 460, 460)
 segment4.draw(color='red')
@@ -180,7 +182,7 @@ point2.draw()
 point2.mirror_line(segment4)
 point2.draw(color='blue')
 
-### Belongs_point
+# Belongs_point
 
 point_true = Point2D(50, 50)
 print("Принадлежность точки (50, 50) точке (150, 50) =",
