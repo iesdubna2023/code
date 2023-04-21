@@ -1,6 +1,3 @@
-import math
-
-
 class Figure2D:
     def set_color(self, color):
         self._color = color
