@@ -13,9 +13,6 @@ class Point2D(Figure2D):
     def __init__(self, x, y):
         self.x, self.y = x, y
 
-    def __str__(self):
-        return "x = {0}, y = {1}".format(self.x, self.y)
-
     def area(self):
         return 0
 
@@ -25,14 +22,14 @@ class Point2D(Figure2D):
         return Point2D(result_x, result_y)
 
     def mirror_line(self, line):
-        n = Point2D(0, 0)
-        n.x = (line.p1.x - line.p2.x)
-        n.y = (line.p1.y - line.p2.y)
-        length = math.sqrt(n.x * n.x + n.y * n.y)
-        n.x /= length
-        n.y /= length
-        dot2 = 2 * (n.x * self.x + n.y * self.y)
-        return Point2D(self.x - dot2 * n.x, self.y - dot2 * n.y)
+        l1 = line.p1
+        l2 = line.p2
+        if l2.x - l1.x != 0:
+            z = (l1.x - l2.y) / (l2.x - l1.x)
+            a = (l2.x * l1.y + l1.x * l2.y) / (l2.x - l1.x)
+            q = (self.x + (self.y - a) * z) / (1 + z ** 2)
+            return Point2D(2 * q - self.x, 2 * q * z - self.y + 2 * a)
+        return Point2D(2 * l1.x - self.x, self.y)
 
     def belongs_point(self, point):
         return self.x == point.x and self.y == point.y
