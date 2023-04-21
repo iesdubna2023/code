@@ -19,13 +19,15 @@ class Point2D(Figure2D):
         y = 2 * point.y - self.y
         return Point2D(x, y)
 
-    def mirror_line(self, p1, p2):
-        a = p2.y - p1.y
-        b = p1.x - p2.x
-        c = -p1.x * (p2.y - p1.y) + p1.y * (p2.x - p1.x)
-        x = self.x - 2 * a * (a * self.x + b * self.y + c) / (a ** 2 + b ** 2)
-        y = self.y - 2 * b * (a * self.x + b * self.y + c) / (a ** 2 + b ** 2)
-        return Point2D(x, y)
+    def mirror_line(self, line):
+        l1 = line.p1
+        l2 = line.p2
+        if l2.x - l1.x != 0:
+            z = (l1.x - l2.y) / (l2.x - l1.x)
+            a = (l2.x * l1.y + l1.x * l2.y) / (l2.x - l1.x)
+            q = (self.x + (self.y - a) * z) / (1 + z ** 2)
+            return Point2D(2 * q - self.x, 2 * q * z - self.y + 2 * a)
+        return Point2D(2 * l1.x - self.x, self.y)
 
     def belongs_point(self, point):
         return self.x == point.x and self.y == point.y
@@ -44,14 +46,15 @@ class Segment2D(Figure2D):
         p2 = self.p2.mirror_point(point)
         return Segment2D(p1, p2)
 
-    def mirror_line(self, p1, p2):
-        p1 = self.p1.mirror_line(p1, p2)
-        p2 = self.p2.mirror_line(p1, p2)
-        return Segment2D(p1, p2)
+    def mirror_line(self, line):    
+        return Segment2D(
+            self.p1.mirror_line(line),
+            self.p2.mirror_line(line)
+        )
 
     def belongs_point(self, point):
-        x1, y1 = self._start_point
-        x2, y2 = self._end_point
+        x1, y1 = self.point1
+        x2, y2 = self.point2
         x, y = point
         d = (x - x1) * (y2 - y1) - (y - y1) * (x2 - x1)
         if d == 0:
