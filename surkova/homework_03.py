@@ -23,23 +23,23 @@ class Point2D(Figure2D):
 
     def normal_to_line(self, line):
         (A, B) = (line.p1, line.p2)
-        x = ((A.x ** 2) * self.x -
-             2 * A.x * B.x * self.x +
-             (B.x ** 2) * self.x +
-             B.x * (A.y - B.y) * (A.y - self.y) -
-             A.x * (A.y - B.y) * (B.y - self.y)
+        x = ((A.x ** 2) * self.x
+             - 2 * A.x * B.x * self.x
+             + (B.x ** 2) * self.x
+             + B.x * (A.y - B.y) * (A.y - self.y)
+             - A.x * (A.y - B.y) * (B.y - self.y)
              ) / (
-                    (A.x - B.x) ** 2 +
-                    (A.y - B.y) ** 2
+                    (A.x - B.x) ** 2
+                    + (A.y - B.y) ** 2
             )
-        y = ((B.x ** 2) * A.y +
-             (A.x ** 2) * B.y +
-             B.x * self.x * (B.y - A.y) -
-             A.x * (self.x * (B.y - A.y) + B.x * (B.y + A.y)) +
-             ((A.y - B.y) ** 2) * self.y
+        y = ((B.x ** 2) * A.y
+             + (A.x ** 2) * B.y
+             + B.x * self.x * (B.y - A.y)
+             - A.x * (self.x * (B.y - A.y) + B.x * (B.y + A.y))
+             + ((A.y - B.y) ** 2) * self.y
              ) / (
-                    (A.x - B.x) ** 2 +
-                    (A.y - B.y) ** 2
+                    (A.x - B.x) ** 2
+                    + (A.y - B.y) ** 2
             )
         return Point2D(x, y)
 
@@ -64,9 +64,12 @@ class Segment2D(Figure2D):
         return Segment2D(point_1_prime, point_2_prime)
 
     def belongs_point(self, pm):
-        ifa = 0 <= (pm.x - self.p1.x) * self.p2.x <= (self.p1.x - self.p2.x) ** 2
-        ifb = 0 <= (pm.y - self.p1.y) * self.p2.y <= (self.p1.y - self.p2.y) ** 2
-        ifc = (pm.x - self.p1.x) * (self.p2.y - self.p1.y) - (self.p2.x - self.p1.x) * (
+        ifa = 0 <= (pm.x - self.p1.x) * self.p2.x \
+              <= (self.p1.x - self.p2.x) ** 2
+        ifb = 0 <= (pm.y - self.p1.y) * self.p2.y \
+              <= (self.p1.y - self.p2.y) ** 2
+        ifc = (pm.x - self.p1.x) * (self.p2.y - self.p1.y) \
+              - (self.p2.x - self.p1.x) * (
                 pm.y - self.p1.y) == 0
         return ifa and ifb and ifc
 
