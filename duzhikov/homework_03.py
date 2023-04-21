@@ -62,14 +62,18 @@ class Segment2D(Figure2D):
         return Segment2D(Point2D(start_x, start_y), Point2D(end_x, end_y))
 
     def belongs_point(self, point):
-        if point.x < min(self.start_point.x, self.end_point.x) or point.x > max(self.start_point.x, self.end_point.x):
+        z = self.start_point.x
+        x = self.end_point.x
+        v = self.start_point.y
+        n = self.end_point.y
+
+        if point.x < min(z, x) or point.x > max(z, x):
             return False
-        if point.y < min(self.start_point.y, self.end_point.y) or point.y > max(self.start_point.y, self.end_point.y):
+        if point.y < min(v, n) or point.y > max(v, n):
             return False
-        a = self.end_point.y - self.start_point.y
-        b = self.start_point.x - self.end_point.x
-        c = -self.start_point.y * (self.start_point.x - self.end_point.x) + self.start_point.x * (
-                    self.start_point.y - self.end_point.y)
+        a = n - v
+        b = z - x
+        c = -v * (z - x) + z * (v - n)
         return abs(a * point.x + b * point.y + c) < 1e-9
 
 
