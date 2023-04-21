@@ -1,9 +1,9 @@
 import math
 
-from PIL import Image, ImageDraw
+# from PIL import Image, ImageDraw
 
-im = Image.new('RGB', (500, 500), (255, 255, 255))
-draw = ImageDraw.Draw(im)
+# im = Image.new('RGB', (500, 500), (255, 255, 255))
+# draw = ImageDraw.Draw(im)
 
 
 class Figure2D:
