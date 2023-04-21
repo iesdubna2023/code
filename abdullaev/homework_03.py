@@ -11,27 +11,31 @@ class Point2D(Figure2D):
         self.x = x
         self.y = y
 
-    def area(self):
+    def area(self):  # площадь фигуры
         return 0
 
-    def mirror_point(self, pm):
+    def mirror_point(self, pm):  # отражение по точке
         result_x = 2 * pm.x - self.x
         result_y = 2 * pm.y - self.y
         return Point2D(result_x, result_y)
 
-    def belongs_point(self, point):
+    def belongs_point(self, point):  # проверка принадлежности фигуры
         return self.x == point.x and self.y == point.y
 
-    def mirror_line(self, line):
-        p1 = line.p1
-        p2 = line.p2
-        if p2.x - p1.x != 0:
-            k = (p2.y - p1.y) / (p2.x - p1.x)
-            b = (p2.x * p1.y + p1.x * p2.y) / (p2.x - p1.x)
-            d = (self.x + (self.y - b) * k) / (1 + k ** 2)
-            return Point2D(2 * d - self.x, 2 * d * k - self.y + 2 * b)
-        else:
-            return Point2D(2 * p1.x - self.x, self.y)
+    def mirror_line(self, pm):
+        # отражение точки относительно прямой
+        # можно реализовать с помощью отражения относительно
+        # точки, являющейся пересечению прямой и её перпендикуляра,
+        # проходящего через исходную точку
+        p1 = pm.p1
+        p2 = pm.p2
+        a = p2.y - p1.y
+        b = p1.x - p2.x
+        c = -a * p1.x - b * p1.y
+        d = (a * self.x + b * self.y + c) / (a ** 2 + b ** 2)
+        foot_p = Point2D(self.x - d * a, self.y - d * b)
+        mirror_point = self.mirror_point(foot_p)
+        return mirror_point
 
 
 class Segment2D(Figure2D):
@@ -86,4 +90,3 @@ class Triangle2D(Figure2D):
         b = Triangle2D(self.p1, self.p3, point)
         c = Triangle2D(self.p2, self.p3, point)
         return not (a.area() + b.area() + c.area() > self.area())
-
