@@ -127,8 +127,8 @@ class Triangle2D(Figure2D):
         answer = False
         for i in range(len(xp)):
             if (((yp[i] <= y and y < yp[i - 1])
-            or (yp[i - 1] <= y and y < yp[i]))
-            and (x > (xp[i - 1] - xp[i]) * (y - yp[i])
-            / (yp[i - 1] - yp[i]) + xp[i])):
-                answer = not answer
+                or (yp[i - 1] <= y and y < yp[i]))
+                and (x > (xp[i - 1] - xp[i]) * (y - yp[i])
+                    / (yp[i - 1] - yp[i]) + xp[i])):
+                        answer = not answer
         return answer
