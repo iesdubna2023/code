@@ -93,7 +93,9 @@ class Segment2D(Figure2D):
 
         answer = (x2 == x3 and x2 == x1 and min(y2, y3) <= y1 <= max(y2, y3))
         if not answer:
-            answer = (y2 == y3 and y2 == y1 and min(x2, x3) <= x1 <= max(x2, x3))
+            z = y2 == y3 and y2 == y1
+            v = min(x2, x3) <= x1 <= max(x2, x3)
+            answer = (z and v)
         if not answer:
             a = y2 - y3
             b = x3 - x2
