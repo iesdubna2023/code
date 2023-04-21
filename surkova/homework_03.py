@@ -29,16 +29,16 @@ class Point2D(Figure2D):
              + B.x * (A.y - B.y) * (A.y - self.y)
              - A.x * (A.y - B.y) * (B.y - self.y)
              ) / (
-              (A.x - B.x) ** 2
-              + (A.y - B.y) ** 2)
+             (A.x - B.x) ** 2
+             + (A.y - B.y) ** 2)
         y = ((B.x ** 2) * A.y
              + (A.x ** 2) * B.y
              + B.x * self.x * (B.y - A.y)
              - A.x * (self.x * (B.y - A.y) + B.x * (B.y + A.y))
              + ((A.y - B.y) ** 2) * self.y
              ) / (
-              (A.x - B.x) ** 2
-              + (A.y - B.y) ** 2)
+             (A.x - B.x) ** 2
+             + (A.y - B.y) ** 2)
         return Point2D(x, y)
 
     def mirror_line(self, line):
