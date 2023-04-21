@@ -19,14 +19,16 @@ class Point2D(Figure2D):
         y_diff = point.y - self.y
         return Point2D(point.x + x_diff, point.y + y_diff)
 
-    def mirror_line(self, point1, point2):
-        x_diff = point2.x - point1.x
-        y_diff = point2.y - point1.y
+    def mirror_line(self, point1):
+        p_1 = point1.p1
+        p_2 = point1.p2
+        x_diff = p_2.x - p_1.x
+        y_diff = p_2.y - p_1.y
         d = x_diff * x_diff + y_diff * y_diff
         if d == 0:
             return Point2D(self.x, self.y)
-        u = ((self.x - point1.x) * x_diff + (self.y - point1.y) * y_diff) / d
-        return Point2D(point1.x + u * x_diff, point1.y + u * y_diff)
+        u = ((self.x - p_1.x) * x_diff + (self.y - p_1.y) * y_diff) / d
+        return Point2D(p_1.x + u * x_diff, p_1.y + u * y_diff)
 
     def belongs_point(self, point):
         return self.x == point.x and self.y == point.y
