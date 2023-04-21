@@ -1,18 +1,18 @@
-def task1(list):
+def reverse(list):
     reversed_lst = []
     for i in range(len(list) - 1, -1, -1):
         reversed_lst.append(list[i])
     return reversed_lst
 
 
-def task2(list):
+def avglen(list):
     total_length = 0
     for word in list:
         total_length += len(word)
     return total_length / len(list)
 
 
-def task3(arg):
+def index(arg):
     indexes = {}
     for i, word in enumerate(arg):
         if word in indexes:
@@ -25,7 +25,7 @@ def task3(arg):
     return indexes
 
 
-def task4(list1, list2):
+def coincidence(list1, list2):
     intersect = []
     for elem in list1:
         if elem in list2 and elem not in intersect:
@@ -33,7 +33,7 @@ def task4(list1, list2):
     return intersect
 
 
-def task5(list):
+def count(list):
     counts = {}
     for word in list:
         if word in counts:
@@ -43,7 +43,7 @@ def task5(list):
     return counts
 
 
-def task6(list):
+def lensort(list):
     sorted_list = []
     for word in list:
         inserted = False
