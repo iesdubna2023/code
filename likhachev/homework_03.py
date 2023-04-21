@@ -4,21 +4,21 @@ class Figure2D:
 
     def get_color(self):
         return self._color
-    
+
 
 class Point2D(Figure2D):
     def __init__(self, x, y):
         self.x = x
         self.y = y
-        
+
     def area(self):
         return 0
-    
+
     def mirror_point(self, point):
         x = 2 * point.x - self.x
         y = 2 * point.y - self.y
         return Point2D(x, y)
-    
+
     def mirror_line(self, p1, p2):
         a = p2.y - p1.y
         b = p1.x - p2.x
@@ -26,29 +26,29 @@ class Point2D(Figure2D):
         x = self.x - 2 * a * (a * self.x + b * self.y + c) / (a ** 2 + b ** 2)
         y = self.y - 2 * b * (a * self.x + b * self.y + c) / (a ** 2 + b ** 2)
         return Point2D(x, y)
-    
+
     def belongs_point(self, point):
         return self.x == point.x and self.y == point.y
-    
+
 
 class Segment2D(Figure2D):
     def __init__(self, p1, p2):
         self.p1 = p1
         self.p2 = p2
-    
+
     def area(self):
         return 0
-    
+
     def mirror_point(self, point):
         p1 = self.p1.mirror_point(point)
         p2 = self.p2.mirror_point(point)
         return Segment2D(p1, p2)
-    
+
     def mirror_line(self, p1, p2):
         p1 = self.p1.mirror_line(p1, p2)
         p2 = self.p2.mirror_line(p1, p2)
         return Segment2D(p1, p2)
-    
+
     def belongs_point(self, point):
         x1, y1 = self._start_point
         x2, y2 = self._end_point
@@ -64,9 +64,8 @@ class Triangle2D(Figure2D):
         self._p1 = p1
         self._p2 = p2
         self._p3 = p3
-    
+
     def area(self):
-        #по формуле Герона
         a = self._p1.distance_to(self._p2)
         b = self._p2.distance_to(self._p3)
         c = self._p3.distance_to(self._p1)
