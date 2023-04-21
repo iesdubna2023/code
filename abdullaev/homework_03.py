@@ -69,14 +69,21 @@ class Triangle2D(Figure2D):
                             - (self.p2.x - self.p3.x)
                             * (self.p1.y - self.p3.y)))
 
-    def mirror_point(self, pm):
-        return Triangle2D(self.p1.mirror_point(pm), self.p2.mirror_point(pm), self.p3.mirror_point(pm))
+    def mirror_point(self, p):
+        return Triangle2D(self.p1.mirror_point(p),
+                          self.p2.mirror_point(p),
+                          self.p3.mirror_point(p)
+                          )
 
-    def mirror_line(self, line):
-        return Triangle2D(self.p1.mirror_line(line), self.p2.mirror_line(line), self.p3.mirror_line(line))
+    def mirror_line(self, l):
+        return Triangle2D(self.p1.mirror_line(l),
+                          self.p2.mirror_line(l),
+                          self.p3.mirror_line(l)
+                          )
 
     def belongs_point(self, point):
         a = Triangle2D(self.p1, self.p2, point)
         b = Triangle2D(self.p1, self.p3, point)
         c = Triangle2D(self.p2, self.p3, point)
         return not (a.area() + b.area() + c.area() > self.area())
+    
