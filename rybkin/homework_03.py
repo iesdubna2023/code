@@ -16,7 +16,7 @@ class Figure2D:
         self.__points = self._correct_points(points)
 
     def __repr__(self):
-        return f"{self.__class__} - базовый класс 2D фигуры. {self.figure_points}"
+        return f"{self.__class__} {self.figure_points}"
 
     def __eq__(self, other):
         """Оператор сравнения фигур"""
@@ -54,7 +54,8 @@ class Figure2D:
         """Отражает фигуру относительно точки"""
 #        raise FigureError("Данный метод должен быть переопределён.")
 
-    def mirror_line(self, line: Tuple[Tuple[float, float], Tuple[float, float]]):
+    def mirror_line(self,
+                    line: Tuple[Tuple[float, float], Tuple[float, float]]):
         """Отражает фигуру относительно прямой"""
 #        raise FigureError("Данный метод должен быть переопределён.")
 
@@ -68,7 +69,7 @@ class Point2D(Figure2D):
         super().__init__(*points, max_points=1)
 
     def __repr__(self):
-        return f"{self.__class__} - класс для 2D точки. {self.figure_points}"
+        return f"{self.__class__} {self.figure_points}"
 
     def area(self) -> float:
         return 0
@@ -79,19 +80,28 @@ class Point2D(Figure2D):
         dy = self.figure_points[0][1] - point[1]
         return Point2D((point[0] - dx, point[1] - dy))
 
-    def mirror_line(self, line: Tuple[Tuple[float, float], Tuple[float, float]]) -> "Point2D":
+    def mirror_line(self,
+                    line: Tuple[Tuple[float, float], Tuple[float, float]]) \
+            -> "Point2D":
         """Отражает фигуру относительно прямой"""
         direction_vector = Point2D((line[1][0] - line[0][0],
                                    line[1][1] - line[0][1]))
-        point_vector = Point2D((self.figure_points[0][0] - line[0][0], self.figure_points[0][1] - line[0][1]))
+        point_vector = Point2D((self.figure_points[0][0]
+                                - line[0][0],
+                                self.figure_points[0][1] - line[0][1]))
 
-        projection = (point_vector.figure_points[0][0] * direction_vector.figure_points[0][1] +
-                      point_vector.figure_points[0][1] * direction_vector.figure_points[0][1]) / \
-                     (direction_vector.figure_points[0][0] ** 2 + direction_vector.figure_points[0][1] ** 2)
+        projection = (point_vector.figure_points[0][0]
+                      * direction_vector.figure_points[0][1] +
+                      point_vector.figure_points[0][1]
+                      * direction_vector.figure_points[0][1]) / \
+                     (direction_vector.figure_points[0][0] ** 2
+                      + direction_vector.figure_points[0][1] ** 2)
 
-        reflected_vector = Point2D((2 * projection * direction_vector.figure_points[0][0]
+        reflected_vector = Point2D((2 * projection
+                                    * direction_vector.figure_points[0][0]
                                     - point_vector.figure_points[0][0],
-                                   2 * projection * direction_vector.figure_points[0][1]
+                                   2 * projection
+                                    * direction_vector.figure_points[0][1]
                                     - point_vector.figure_points[0][1]))
 
         reflected_x = line[0][0] + reflected_vector.figure_points[0][0]
@@ -127,7 +137,8 @@ class Segment2D(Figure2D):
         return Segment2D((new_x1, new_y1), (new_x2, new_y2))
 
     def mirror_line(self,
-                    line: Tuple[Tuple[float, float], Tuple[float, float]]) -> "Segment2D":
+                    line: Tuple[Tuple[float, float], Tuple[float, float]]) \
+            -> "Segment2D":
         """Отражает фигуру относительно прямой"""
         x1, y1 = line[0]
         x2, y2 = line[1]
@@ -176,7 +187,7 @@ class Triangle2D(Figure2D):
             raise FigureError("Из данных точек невозможно создать треугольник.")
 
     def __repr__(self):
-        return f"{self.__class__} - класс для 2D треугольника. {self.figure_points}"
+        return f"{self.__class__} {self.figure_points}"
 
     def _is_triangle(self, *points) -> bool:
         """Проверяет точки на валидность к треугольнику"""
@@ -186,7 +197,9 @@ class Triangle2D(Figure2D):
         side1 = ((x1 - x2) ** 2 + (y1 - y2) ** 2) ** 0.5
         side2 = ((x1 - x3) ** 2 + (y1 - y3) ** 2) ** 0.5
         side3 = ((x2 - x3) ** 2 + (y2 - y3) ** 2) ** 0.5
-        if side1 + side2 > side3 and side1 + side3 > side2 and side2 + side3 > side1:
+        if side1 + side2 > side3 and \
+                side1 + side3 > side2 and \
+                side2 + side3 > side1:
             return True
         return False
 
@@ -195,18 +208,24 @@ class Triangle2D(Figure2D):
         x1, y1 = self.figure_points[0]
         x2, y2 = self.figure_points[1]
         x3, y3 = self.figure_points[2]
-        return abs(x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2)) / 2.0
+        return abs(x1 * (y2 - y3)
+                   + x2 * (y3 - y1)
+                   + x3 * (y1 - y2)) / 2.0
 
     def mirror_point(self, point: Tuple[float, float]) -> "Triangle2D":
         """Отражает фигуру относительно точки"""
         x, y = point
-        new_p1 = (2 * x - self.figure_points[0][0], 2 * y - self.figure_points[0][1])
-        new_p2 = (2 * x - self.figure_points[1][0], 2 * y - self.figure_points[1][1])
-        new_p3 = (2 * x - self.figure_points[2][0], 2 * y - self.figure_points[2][1])
+        new_p1 = (2 * x - self.figure_points[0][0], 2 * y
+                  - self.figure_points[0][1])
+        new_p2 = (2 * x - self.figure_points[1][0], 2 * y
+                  - self.figure_points[1][1])
+        new_p3 = (2 * x - self.figure_points[2][0], 2 * y
+                  - self.figure_points[2][1])
         return Triangle2D(new_p1, new_p2, new_p3)
 
     def mirror_line(self,
-                    line: Tuple[Tuple[float, float], Tuple[float, float]]) -> "Triangle2D":
+                    line: Tuple[Tuple[float, float], Tuple[float, float]]) \
+            -> "Triangle2D":
         """Отражает фигуру относительно прямой"""
         x1, y1 = line[0]
         x2, y2 = line[1]
@@ -214,17 +233,23 @@ class Triangle2D(Figure2D):
         length = math.sqrt(dx ** 2 + dy ** 2)
         nx, ny = -dy / length, dx / length
         proj_p1 = (self.figure_points[0][0] * nx
-                   + self.figure_points[0][1] * ny - x1 * nx - y1 * ny) * nx + x1, \
+                   + self.figure_points[0][1] * ny
+                   - x1 * nx - y1 * ny) * nx + x1, \
             (self.figure_points[0][0] * nx
-             + self.figure_points[0][1] * ny - x1 * nx - y1 * ny) * ny + y1
+             + self.figure_points[0][1] * ny
+             - x1 * nx - y1 * ny) * ny + y1
         proj_p2 = (self.figure_points[1][0] * nx
-                   + self.figure_points[1][1] * ny - x1 * nx - y1 * ny) * nx + x1, \
+                   + self.figure_points[1][1] * ny
+                   - x1 * nx - y1 * ny) * nx + x1, \
             (self.figure_points[1][0] * nx
-             + self.figure_points[1][1] * ny - x1 * nx - y1 * ny) * ny + y1
+             + self.figure_points[1][1] * ny
+             - x1 * nx - y1 * ny) * ny + y1
         proj_p3 = (self.figure_points[2][0] * nx
-                   + self.figure_points[2][1] * ny - x1 * nx - y1 * ny) * nx + x1, \
+                   + self.figure_points[2][1] * ny
+                   - x1 * nx - y1 * ny) * nx + x1, \
             (self.figure_points[2][0] * nx
-             + self.figure_points[2][1] * ny - x1 * nx - y1 * ny) * ny + y1
+             + self.figure_points[2][1] * ny
+             - x1 * nx - y1 * ny) * ny + y1
         refl_p1 = (self.figure_points[0][0]
                    - 2*(proj_p1[0] - x1), self.figure_points[0][1]
                    - 2*(proj_p1[1] - y1))
@@ -242,7 +267,11 @@ class Triangle2D(Figure2D):
         x1, y1 = self.figure_points[0]
         x2, y2 = self.figure_points[1]
         x3, y3 = self.figure_points[2]
-        alpha = ((y2 - y3) * (x - x3) + (x3 - x2) * (y - y3)) / ((y2 - y3) * (x1 - x3) + (x3 - x2) * (y1 - y3))
-        beta = ((y3 - y1) * (x - x3) + (x1 - x3) * (y - y3)) / ((y2 - y3) * (x1 - x3) + (x3 - x2) * (y1 - y3))
+        alpha = ((y2 - y3) * (x - x3)
+                 + (x3 - x2) * (y - y3)) / ((y2 - y3) * (x1 - x3)
+                                            + (x3 - x2) * (y1 - y3))
+        beta = ((y3 - y1) * (x - x3)
+                + (x1 - x3) * (y - y3)) / ((y2 - y3) * (x1 - x3)
+                                           + (x3 - x2) * (y1 - y3))
         gamma = 1 - alpha - beta
         return 0 <= alpha <= 1 and 0 <= beta <= 1 and 0 <= gamma <= 1
