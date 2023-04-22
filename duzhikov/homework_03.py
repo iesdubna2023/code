@@ -124,24 +124,6 @@ class Triangle2D(Figure2D):
         )
 
     def mirror_line(self, line):
-        p1 = line.p1
-        p2 = line.p2
-        if math.isclose(p2.x, p1.x, rel_tol=1e-9, abs_tol=1e-9):
-            d = p1.x
-            x_mirror = self.x
-            y_mirror = 2 * d - self.y
-        else:
-            m1 = p2.y - p1.y
-            m2 = p2.x - p1.x
-            m = m1 / m2
-            b1 = p1.y - m
-            b = b1 * p1.x
-            d1 = self.x + (self.y - b) * m
-            d = d1 / (1 + m ** 2)
-            e = m * d + b
-            x_mirror = 2 * d - self.x
-            y_mirror = 2 * e - self.y
-
         return Triangle2D(
             self.p1.mirror_line(line),
             self.p2.mirror_line(line),
