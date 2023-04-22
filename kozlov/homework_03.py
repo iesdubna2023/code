@@ -106,9 +106,12 @@ class Triangle2D(Figure2D):
         self.p3 = p3
 
     def area(self):
-        a = math.sqrt((self.p2.x - self.p1.x) ** 2 + (self.p2.y - self.p1.y) ** 2)
-        b = math.sqrt((self.p3.x - self.p2.x) ** 2 + (self.p3.y - self.p2.y) ** 2)
-        c = math.sqrt((self.p1.x - self.p3.x) ** 2 + (self.p1.y - self.p3.y) ** 2)
+        a = math.sqrt((self.p2.x - self.p1.x) ** 2
+                      + (self.p2.y - self.p1.y) ** 2)
+        b = math.sqrt((self.p3.x - self.p2.x) ** 2
+                      + (self.p3.y - self.p2.y) ** 2)
+        c = math.sqrt((self.p1.x - self.p3.x) ** 2
+                      + (self.p1.y - self.p3.y) ** 2)
         p = (a + b + c) / 2
         S = math.sqrt(p * (p - a) * (p - b) * (p - c))
         return S
