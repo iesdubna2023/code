@@ -50,7 +50,10 @@ class Segment2D(Figure2D):
         return 0.0
 
     def mirror_point(self, point):
-        return Segment2D(self.p1.mirror_point(point), self.p2.mirror_point(point))
+        return Segment2D(
+            self.p1.mirror_point(point),
+            self.p2.mirror_point(point)
+        )
 
     def mirror_line(self, p1, p2):
         m = (p2.y - p1.y) / (p2.x - p1.x)
@@ -96,10 +99,18 @@ class Triangle2D(Figure2D):
         return (s * (s - a) * (s - b) * (s - c)) ** 0.5
 
     def mirror_point(self, point):
-        return Triangle2D(self.p1.mirror_point(point), self.p2.mirror_point(point), self.p3.mirror_point(point))
+        return Triangle2D(
+            self.p1.mirror_point(point),
+            self.p2.mirror_point(point),
+            self.p3.mirror_point(point)
+        )
 
     def mirror_line(self, line):
-        return Triangle2D(self.p1.mirror_line(line), self.p2.mirror_line(line), self.p3.mirror_line(line))
+        return Triangle2D(
+            self.p1.mirror_line(line),
+            self.p2.mirror_line(line),
+            self.p3.mirror_line(line)
+        )
 
     def belongs_point(self, point):
         px = point.x
