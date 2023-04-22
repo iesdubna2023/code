@@ -128,4 +128,3 @@ class Triangle2D(Figure2D):
             if ((a or b) and x > (c * d)):
                 answer = not answer
         return answer
-
