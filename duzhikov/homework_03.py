@@ -27,33 +27,38 @@ class Point2D(Figure2D):
         return Point2D(2 * point.x - self.x, 2 * point.y - self.y)
 
     def mirror_line(self, line):
-        pass
+        p1 = line.p1
+        p2 = line.p2
+        if p2.x - p1.x != 0:
+            g = (p2.y - p1.y) / (p2.x - p1.x)
+            s = (p2.x * p1.y + p1.x * p2.y) / (p2.x - p1.x)
+            u = (self.x + (self.y - s) * g) / (1 + g ** 2)
+            return Point2D(2 * u - self.x, 2 * u * g - self.y + 2 * s)
+        else:
+            return Point2D(2 * p1.x - self.x, self.y)
 
     def belongs_point(self, point):
         return self.x == point.x and self.y == point.y
 
 
 class Segment2D(Figure2D):
-    def __init__(self, start_point, end_point):
-        self.start_point = start_point
-        self.end_point = end_point
+    def __init__(self, p1, p2):
+        self.p1 = p1
+        self.p2 = p2
 
     def area(self):
         return 0.0
 
     def mirror_point(self, point):
-        return Segment2D(
-            self.start_point.mirror_point(point),
-            self.end_point.mirror_point(point)
-        )
+        return Segment2D(self.p1.mirror_point(point), self.p2.mirror_point(point))
 
     def mirror_line(self, p1, p2):
         m = (p2.y - p1.y) / (p2.x - p1.x)
         b = p1.y - m * p1.x
-        c = self.start_point.x
-        d = self.start_point.y
-        e = self.end_point.x
-        f = self.end_point.y
+        c = self.p1.x
+        d = self.p1.y
+        e = self.p2.x
+        f = self.p2.y
         start_x = (c + (2 * m * (d - b))) / (1 + m ** 2)
         start_y = (2 * m * start_x) + (2 * b) - d
         end_x = (e + (2 * m * (f - b))) / (1 + m ** 2)
@@ -62,10 +67,10 @@ class Segment2D(Figure2D):
         return Segment2D(Point2D(start_x, start_y), Point2D(end_x, end_y))
 
     def belongs_point(self, point):
-        z = self.start_point.x
-        x = self.end_point.x
-        v = self.start_point.y
-        n = self.end_point.y
+        z = self.p1.x
+        x = self.p2.x
+        v = self.p1.y
+        n = self.p2.y
 
         if point.x < min(z, x) or point.x > max(z, x):
             return False
@@ -78,7 +83,7 @@ class Segment2D(Figure2D):
 
 
 class Triangle2D(Figure2D):
-    def init(self, p1, p2, p3):
+    def __init__(self, p1, p2, p3):
         self.p1 = p1
         self.p2 = p2
         self.p3 = p3
@@ -90,13 +95,11 @@ class Triangle2D(Figure2D):
         s = (a + b + c) / 2
         return (s * (s - a) * (s - b) * (s - c)) ** 0.5
 
-    def mirror_point(self, p):
-        return Triangle2D(self.p1.mirror_point(p), self.p2.mirror_point(p),
-                          self.p3.mirror_point(p))
+    def mirror_point(self, point):
+        return Triangle2D(self.p1.mirror_point(point), self.p2.mirror_point(point), self.p3.mirror_point(point))
 
     def mirror_line(self, line):
-        return Triangle2D(self.p1.mirror_line(line), self.p2.mirror_line(line),
-                          self.p3.mirror_line(line))
+        return Triangle2D(self.p1.mirror_line(line), self.p2.mirror_line(line), self.p3.mirror_line(line))
 
     def belongs_point(self, point):
         px = point.x
