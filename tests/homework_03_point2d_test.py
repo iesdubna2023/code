@@ -1,4 +1,5 @@
 import logging
+import math
 
 
 def test_point2d_area(iter_homework):
@@ -28,6 +29,11 @@ def test_point2d_mirror_line(iter_homework):
         newp = p.mirror_line(ml)
         assert newp.x == 1
         assert newp.y == -1
+        p = m.Point2D(-0.01, 1)
+        s = m.Segment2D(m.Point2D(-100, -1), m.Point2D(100, 1))
+        newp = p.mirror_line(s)
+        assert math.isclose(newp.x, 0.01, abs_tol=0.005)
+        assert math.isclose(newp.y, -1, abs_tol=0.005)
         logging.info("Test Point2D.mirror_line for %s: OK", surname)
 
 
