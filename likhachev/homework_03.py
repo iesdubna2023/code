@@ -64,32 +64,32 @@ class Segment2D(Figure2D):
 
 
 class Triangle2D(Figure2D):
-    def init(self, p1, p2, p3):
-        self._p1 = p1
-        self._p2 = p2
-        self._p3 = p3
+    def __init__(self, p1, p2, p3):
+        self.p1 = p1
+        self.p2 = p2
+        self.p3 = p3
 
     def area(self):
-        a = self._p1.distance_to(self._p2)
-        b = self._p2.distance_to(self._p3)
-        c = self._p3.distance_to(self._p1)
+        a = self.p1.distance_to(self.p2)
+        b = self.p2.distance_to(self.p3)
+        c = self.p3.distance_to(self.p1)
         p = (a + b + c) / 2
         return (p * (p - a) * (p - b) * (p - c)) ** 0.5
 
     def mirror_point(self, pointm):
-        return Triangle2D(self._p1.mirror_point(pointm),
-                          self._p2.mirror_point(pointm),
-                          self._p3.mirror_point(pointm))
+        return Triangle2D(self.p1.mirror_point(pointm),
+                          self.p2.mirror_point(pointm),
+                          self.p3.mirror_point(pointm))
 
     def mirror_line(self, mline):
-        return Triangle2D(self._p1.mirror_line(mline),
-                          self._p2.mirror_line(mline),
-                          self._p3.mirror_line(mline))
+        return Triangle2D(self.p1.mirror_line(mline),
+                          self.p2.mirror_line(mline),
+                          self.p3.mirror_line(mline))
 
     def belongs_point(self, point):
-        v1 = self._p1.vector_to(self._p2)
-        v2 = self._p1.vector_to(self._p3)
-        v3 = self._p1.vector_to(point)
+        v1 = self.p1.vector_to(self.p2)
+        v2 = self.p1.vector_to(self.p3)
+        v3 = self.p1.vector_to(point)
         if (v1.cross(v2) > 0) == (v1.cross(v3) > 0) == (v2.cross(v3) > 0):
             return True
         return False
