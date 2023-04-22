@@ -26,7 +26,7 @@ class Point2D(Figure2D):
         return (dx ** 2 + dy ** 2) ** 0.5
 
     def area(self):
-        return 0.0
+        return 0
 
     def mirror_point(self, point):
         return Point2D(2 * point.x - self.x, 2 * point.y - self.y)
@@ -52,7 +52,7 @@ class Segment2D(Figure2D):
         self.p2 = p2
 
     def area(self):
-        return 0.0
+        return 0
 
     def mirror_point(self, point):
         return Segment2D(
@@ -60,7 +60,9 @@ class Segment2D(Figure2D):
             self.p2.mirror_point(point)
         )
 
-    def mirror_line(self, p1, p2):
+    def mirror_line(self, line):
+        p1 = line.p1
+        p2 = line.p2
         m = (p2.y - p1.y) / (p2.x - p1.x)
         b = p1.y - m * p1.x
         c = self.p1.x
