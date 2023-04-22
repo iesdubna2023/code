@@ -114,3 +114,4 @@ class Triangle2D(Figure2D):
         b = (p3y - p1y) * (px - p3x) + (p1x - p3x) * (py - p3y)
         c = 1 - a - b
         return 0 <= a <= 1 and 0 <= b <= 1 and 0 <= c <= 1
+
