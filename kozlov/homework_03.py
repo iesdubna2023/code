@@ -52,21 +52,15 @@ class Segment2D(Figure2D):
         return Segment2D(p1, p2)
 
     def belongs_point(self, point):
-        x, y = point.x, point.y
-        x1, y1 = self.p1.x, self.p1.y
-        x2, y2 = self.p2.x, self.p2.y
+        a = (point.x - self.p1.x)
+        b = (self.p2.y - self.p1.y)
+        c = (self.p2.x - self.p1.x)
+        d = (point.y - self.p1.y)
+        e = (a * b - c * d) == 0
 
-        answer = (x1 == x2 and x1 == x and min(y1, y2) <= y <= max(y1, y2))
-        if not answer:
-            z = y1 == y2 and y1 == y
-            v = min(x1, x2) <= x <= max(x1, x2)
-            answer = (z and v)
-        if not answer:
-            a = y1 - y2
-            b = x2 - x1
-            c = x1 * y2 - x2 * y1
-            answer = (a * x + b * y + c == 0)
-        return answer
+        f = self.p1.x < point.x < self.p2.x
+        g = self.p2.x < point.x < self.p1.x
+        return e and (f or g)
 
 
 class Triangle2D(Figure2D):
@@ -76,15 +70,12 @@ class Triangle2D(Figure2D):
         self.p3 = p3
 
     def area(self):
-        a = math.sqrt((self.p2.x - self.p1.x) ** 2
-                      + (self.p2.y - self.p1.y) ** 2)
-        b = math.sqrt((self.p3.x - self.p2.x) ** 2
-                      + (self.p3.y - self.p2.y) ** 2)
-        c = math.sqrt((self.p1.x - self.p3.x) ** 2
-                      + (self.p1.y - self.p3.y) ** 2)
-        p = (a + b + c) / 2
-        S = math.sqrt(p * (p - a) * (p - b) * (p - c))
-        return round(S)
+        a = (self.p1.x - self.p3.x)
+        b = (self.p2.y - self.p3.y)
+        c = (self.p2.x - self.p3.x)
+        d = (self.p1.y - self.p3.y)
+
+        return abs(1 / 2 * (a * b - c * d))
 
     def mirror_point(self, point):
         p1 = self.p1.mirror_point(point)
@@ -100,8 +91,8 @@ class Triangle2D(Figure2D):
 
     def belongs_point(self, point):
         # Если сумма площадей треугольников с новой точкой
-        # равно площади треугольника, значит эта точка принадлежит ему
+        # равна площади треугольника, значит эта точка принадлежит ему
         t1 = Triangle2D(self.p1, self.p2, point)
         t2 = Triangle2D(self.p1, self.p3, point)
         t3 = Triangle2D(self.p2, self.p3, point)
-        return not (t1.area() + t2.area() + t3.area() > self.area())
+        return (t1.area() + t2.area() + t3.area()) == self.area()
