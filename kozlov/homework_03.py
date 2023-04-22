@@ -1,10 +1,5 @@
 import math
 
-from PIL import Image, ImageDraw
-
-im = Image.new('RGB', (500, 500), (255, 255, 255))
-draw = ImageDraw.Draw(im)
-
 
 class Figure2D:
     def __init__(self):
@@ -33,15 +28,6 @@ class Figure2D:
             y4 = round((y2 - y1) * (x4 - x1) / (x2 - x1) + y1)
             self.points[i].x = x4 + (x4 - x3)
             self.points[i].y = y4 + (y4 - y3)
-
-    def draw(self, color='black'):
-        for i in range(0, len(self.points)):
-            a = self.points[i].x
-            b = self.points[i].y
-            c = self.points[(i + 1) % len(self.points)].x
-            d = self.points[(i + 1) % len(self.points)].y
-            draw.line((a, b, c, d), fill=color, width=1)
-        im.save('image.jpg', quality=95)
 
 
 class Point2D(Figure2D):
