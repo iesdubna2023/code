@@ -1,6 +1,6 @@
-from typing import Tuple
+# from typing import Tuple
 from abc import ABCMeta, abstractmethod
-import math
+# import math
 
 
 class Figure2D:
