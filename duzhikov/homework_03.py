@@ -31,7 +31,9 @@ class Point2D(Figure2D):
     def mirror_point(self, point):
         return Point2D(2 * point.x - self.x, 2 * point.y - self.y)
 
-    def mirror_line(self, p1, p2):
+    def mirror_line(self, line):
+        p1 = line.p1
+        p2 = line.p2
         m = (p2.y - p1.y) / (p2.x - p1.x)
         b = p1.y - m * p1.x
         d = (self.x + (self.y - b) * m) / (1 + m ** 2)
