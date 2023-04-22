@@ -70,11 +70,14 @@ class Triangle2D(Figure2D):
         self.p3 = p3
 
     def area(self):
-        a = self.p1.distance_to(self.p2)
-        b = self.p2.distance_to(self.p3)
-        c = self.p3.distance_to(self.p1)
-        p = (a + b + c) / 2
-        return (p * (p - a) * (p - b) * (p - c)) ** 0.5
+        ab = ((self.p1.x - self.p2.x) ** 2
+              + (self.p1.y - self.p2.y) ** 2) ** 0.5
+        ac = ((self.p1.x - self.p3.x) ** 2
+              + (self.p1.y - self.p3.y) ** 2) ** 0.5
+        bc = ((self.p2.x - self.p3.x) ** 2
+              + (self.p2.y - self.p3.y) ** 2) ** 0.5
+        p = (ab + ac + bc) / 2
+        return round((p * (p - ab) * (p - ac) * (p - bc)) ** 0.5, 10)
 
     def mirror_point(self, pointm):
         return Triangle2D(self.p1.mirror_point(pointm),
