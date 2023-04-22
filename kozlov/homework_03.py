@@ -19,15 +19,15 @@ class Point2D(Figure2D):
     def mirror_line(self, segment):
         x1, y1 = segment.p1.x, segment.p1.y
         x2, y2 = segment.p2.x, segment.p2.y
-        if x2 - x1 != 0:
-            a = (y2 - y1) / (x2 - x1)
-            b = (x2 * y1 + x1 * y2) / (x2 - x1)
-            c = (self.x + (self.y - b) * a) / (1 + a ** 2)
-            x = 2 * c - self.x,
-            y = 2 * c * a - self.y + 2 * b
-        else:
-            x = 2 * x1 - self.x
-            y = self.y
+        x3, y3 = self.x, self.y
+        x4_1 = (x2 - x1) * (y2 - y1) * (y3 - y1)
+        x4_2 = x1 * pow(y2 - y1, 2) + x3 * pow(x2 - x1, 2)
+        x4_3 = (pow(y2 - y1, 2) + pow(x2 - x1, 2))
+        x4 = round((x4_1 + x4_2) / x4_3)
+        y4 = round((y2 - y1) * (x4 - x1) / (x2 - x1) + y1)
+
+        x = x4 + (x4 - x3)
+        y = y4 + (y4 - y3)
         return Point2D(x, y)
 
     def belongs_point(self, figure):
