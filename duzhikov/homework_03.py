@@ -65,8 +65,8 @@ class Segment2D(Figure2D):
 
     def mirror_line(self, line):
         return Segment2D(
-            self.p1.mirror_point(line),
-            self.p2.mirror_point(line)
+            self.p1.mirror_point(line).mirror_point(line),
+            self.p2.mirror_point(line).mirror_point(line)
         )
 
     def belongs_point(self, point):
