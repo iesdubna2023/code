@@ -6,7 +6,7 @@ def reverse(arg):
 
 
 def avglen(arg):
-    sum([len(i) for i in arg]) / len(arg)
+    #sum([len(i) for i in arg]) / len(arg)
     return sum([len(i) for i in arg]) / len(arg)
 
 
@@ -22,6 +22,7 @@ def index(arg):
             copy = result[i][0]
             result[i] = copy
     return result
+arg = []
 
 
 def coincidence(arg1, arg2):
@@ -41,3 +42,6 @@ def count(arg):
 
 def lensort(arg):
     return sorted(arg, key=len)
+
+
+
