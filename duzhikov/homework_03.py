@@ -68,20 +68,10 @@ class Segment2D(Figure2D):
         )
 
     def mirror_line(self, line):
-        p1 = line.p1
-        p2 = line.p2
-        m = (p2.y - p1.y) / (p2.x - p1.x)
-        b = p1.y - m * p1.x
-        c = self.p1.x
-        d = self.p1.y
-        e = self.p2.x
-        f = self.p2.y
-        start_x = (c + (2 * m * (d - b))) / (1 + m ** 2)
-        start_y = (2 * m * start_x) + (2 * b) - d
-        end_x = (e + (2 * m * (f - b))) / (1 + m ** 2)
-        end_y = (2 * m * end_x) + (2 * b) - f
-
-        return Segment2D(Point2D(start_x, start_y), Point2D(end_x, end_y))
+        return Segment2D(
+            self.p1.mirror_point(line),
+            self.p2.mirror_point(line)
+        )
 
     def belongs_point(self, point):
         z = self.p1.x
