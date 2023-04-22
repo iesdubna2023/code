@@ -67,8 +67,8 @@ class Point2D(Figure2D):
         point_vector = Point2D(self.x - line.p1.x,
                                self.y - line.p1.y)
 
-        projection = (point_vector.x * direction_vector.y +
-                      point_vector.y * direction_vector.y) / \
+        projection = (point_vector.x * direction_vector.y
+                      + point_vector.y * direction_vector.y) / \
                      (direction_vector.x ** 2 + direction_vector.y ** 2)
 
         ref = Point2D(2 * projection * direction_vector.x - point_vector.x,
