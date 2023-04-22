@@ -1,6 +1,3 @@
-from math import isclose
-
-
 class Figure2D:
     def __init__(self):
         pass
@@ -103,4 +100,4 @@ class Triangle2D(Figure2D):
         t1 = Triangle2D(self.p1, self.p2, point)
         t2 = Triangle2D(self.p1, self.p3, point)
         t3 = Triangle2D(self.p2, self.p3, point)
-        return isclose(t1.area() + t2.area() + t3.area(), self.area())
+        return round(t1.area() + t2.area() + t3.area()) == round(self.area())
