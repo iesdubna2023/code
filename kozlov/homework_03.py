@@ -19,14 +19,16 @@ class Point2D(Figure2D):
     def mirror_line(self, segment):
         x1, y1 = segment.p1.x, segment.p1.y
         x2, y2 = segment.p2.x, segment.p2.y
-        if x1 == 0 or y1 == 0 or x2 == 0 or y2 == 0:
+        x3, y3 = self.x, self.y
+
+        x4_1 = (x2 - x1) * (y2 - y1) * (y3 - y1)
+        x4_2 = x1 * pow(y2 - y1, 2) + x3 * pow(x2 - x1, 2)
+        x4_3 = (pow(y2 - y1, 2) + pow(x2 - x1, 2))
+
+        if x4_3 == 0 or ((x2 - x1) + y1) == 0:
             x = self.x
             y = self.y
         else:
-            x3, y3 = self.x, self.y
-            x4_1 = (x2 - x1) * (y2 - y1) * (y3 - y1)
-            x4_2 = x1 * pow(y2 - y1, 2) + x3 * pow(x2 - x1, 2)
-            x4_3 = (pow(y2 - y1, 2) + pow(x2 - x1, 2))
             x4 = round((x4_1 + x4_2) / x4_3)
             y4 = round((y2 - y1) * (x4 - x1) / (x2 - x1) + y1)
 
