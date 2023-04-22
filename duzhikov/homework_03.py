@@ -31,16 +31,15 @@ class Point2D(Figure2D):
     def mirror_point(self, point):
         return Point2D(2 * point.x - self.x, 2 * point.y - self.y)
 
-    def mirror_line(self, line):
-        p1 = line.p1
-        p2 = line.p2
-        if p2.x - p1.x != 0:
-            g = (p2.y - p1.y) / (p2.x - p1.x)
-            s = (p2.x * p1.y + p1.x * p2.y) / (p2.x - p1.x)
-            u = (self.x + (self.y - s) * g) / (1 + g ** 2)
-            return Point2D(2 * u - self.x, 2 * u * g - self.y + 2 * s)
-        else:
-            return Point2D(2 * p1.x - self.x, self.y)
+    def mirror_line(self, p1, p2):
+        m = (p2.y - p1.y) / (p2.x - p1.x)
+        b = p1.y - m * p1.x
+        d = (self.x + (self.y - b) * m) / (1 + m ** 2)
+        e = m * d + b
+        x_mirror = 2 * d - self.x
+        y_mirror = 2 * e - self.y
+
+        return Point2D(x_mirror, y_mirror)
 
     def belongs_point(self, point):
         return self.x == point.x and self.y == point.y
