@@ -90,13 +90,13 @@ class Triangle2D(Figure2D):
                           self.p3.mirror_line(mline))
 
     def belongs_point(self, point):
-        x1, y1 = self._point1
-        x2, y2 = self._point2
-        x3, y3 = self._point3
+        x1, y1 = self.p1
+        x2, y2 = self.p2
+        x3, y3 = self.p3
         x, y = point
-        a = (y2-y1)*(x-x1)-(x2-x1)*(y-y1)
-        b = (y3-y2)*(x-x2)-(x3-x2)*(y-y2)
-        c = (y1-y3)*(x-x3)-(x1-x3)*(y-y3)
+        a = (y2 - y1) * (x - x1) - (x2 - x1) * (y - y1)
+        b = (y3 - y2) * (x - x2) - (x3 - x2) * (y - y2)
+        c = (y1 - y3) * (x - x3) - (x1 - x3) * (y - y3)
         if (a > 0 and b > 0 and c > 0) or (a < 0 and b < 0 and c < 0):
             return True
         else:
