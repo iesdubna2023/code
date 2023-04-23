@@ -119,8 +119,9 @@ class Segment2D(Figure2D):
         b = self.p1.y - m * self.p1.x
         if abs(point.y - (m * point.x + b)) > 1e-6:
             return False
-        dot_product = (point.x - self.p1.x) * (self.p2.x - self.p1.x) \
-                      + (point.y - self.p1.y) * (self.p2.y - self.p1.y)
+        dot_product = (point.x - self.p1.x) * \
+                      (self.p2.x - self.p1.x) + (point.y - self.p1.y) * \
+                      (self.p2.y - self.p1.y)
         if dot_product < 0 or dot_product > (self.p2.x - self.p1.x)**2 \
                 + (self.p2.y - self.p1.y)**2:
             return False
