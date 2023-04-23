@@ -17,25 +17,25 @@ class Point2D(Figure2D):
         return Point2D(x, y)
 
     def mirror_line(self, segment):
-		x1, y1 = segment.p1.x, segment.p1.y
-		x2, y2 = segment.p2.x, segment.p2.y
-		x3, y3 = self.x, self.y
-		a = (x2 - x1) * (y2 - y1) * (y3 - y1)
-		b = x1 * pow(y2 - y1, 2) + x3 * pow(x2 - x1, 2)
-		c = (pow(y2 - y1, 2) + pow(x2 - x1, 2))
-		if c == 0:
-			x = self.x
-		else: 
-			x4 = round((a + b) / c)
-			x = x4 + (x4 - x3)
-			
-		if (x2 - x1) == 0:
-			y = self.y
-		else:
-			y4 = round((y2 - y1) * (x4 - x1) / (x2 - x1) + y1)
-			y = y4 + (y4 - y3)
-		
-		return Point2D(x, y)
+        x1, y1 = segment.p1.x, segment.p1.y
+        x2, y2 = segment.p2.x, segment.p2.y
+        x3, y3 = self.x, self.y
+        a = (x2 - x1) * (y2 - y1) * (y3 - y1)
+        b = x1 * pow(y2 - y1, 2) + x3 * pow(x2 - x1, 2)
+        c = (pow(y2 - y1, 2) + pow(x2 - x1, 2))
+        if c == 0:
+            x = self.x
+        else: 
+            x4 = round((a + b) / c)
+            x = x4 + (x4 - x3)
+            
+        if (x2 - x1) == 0:
+            y = self.y
+        else:
+            y4 = round((y2 - y1) * (x4 - x1) / (x2 - x1) + y1)
+            y = y4 + (y4 - y3)
+        
+        return Point2D(x, y)
 
     def belongs_point(self, figure):
         x, y = figure.x, figure.y
