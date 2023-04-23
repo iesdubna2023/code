@@ -69,8 +69,10 @@ class Point2D(Figure2D):
         term2 = -2 * a * b
         term3 = -2 * a * b
         term4 = a ** 2 - b ** 2
-        return Point2D((term1 * p_0[0] + term2 * p_0[1] - 2 * c * a) / (a ** 2 + b ** 2),
-                       (term3 * p_0[0] + term4 * p_0[1] - 2 * c * b) / (a ** 2 + b ** 2))
+        return Point2D((term1 * p_0[0] + term2 * p_0[1]
+                        - 2 * c * a) / (a ** 2 + b ** 2),
+                       (term3 * p_0[0] + term4 * p_0[1]
+                        - 2 * c * b) / (a ** 2 + b ** 2))
 
     def belongs_point(self, point) -> bool:
         """Проверяет на принадлежность точки к фигуре"""
@@ -117,8 +119,10 @@ class Segment2D(Figure2D):
         b = self.p1.y - m * self.p1.x
         if abs(point.y - (m * point.x + b)) > 1e-6:
             return False
-        dot_product = (point.x - self.p1.x) * (self.p2.x - self.p1.x) + (point.y - self.p1.y) * (self.p2.y - self.p1.y)
-        if dot_product < 0 or dot_product > (self.p2.x - self.p1.x)**2 + (self.p2.y - self.p1.y)**2:
+        dot_product = (point.x - self.p1.x) * (self.p2.x - self.p1.x) \
+                      + (point.y - self.p1.y) * (self.p2.y - self.p1.y)
+        if dot_product < 0 or dot_product > (self.p2.x - self.p1.x)**2 \
+                + (self.p2.y - self.p1.y)**2:
             return False
         return True
 
