@@ -28,7 +28,6 @@ class Point2D(Figure2D):
         else:
             x4 = round((a + b) / c)
             x = x4 + (x4 - x3)
-
         if (x2 - x1) == 0:
             y = self.y
         else:
