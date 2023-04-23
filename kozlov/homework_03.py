@@ -25,16 +25,16 @@ class Point2D(Figure2D):
         c = (pow(y2 - y1, 2) + pow(x2 - x1, 2))
         if c == 0:
             x = self.x
-        else: 
+        else:
             x4 = round((a + b) / c)
             x = x4 + (x4 - x3)
-            
+
         if (x2 - x1) == 0:
             y = self.y
         else:
             y4 = round((y2 - y1) * (x4 - x1) / (x2 - x1) + y1)
             y = y4 + (y4 - y3)
-        
+
         return Point2D(x, y)
 
     def belongs_point(self, figure):
