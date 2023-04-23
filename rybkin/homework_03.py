@@ -1,5 +1,4 @@
 from abc import ABCMeta, abstractmethod
-# test
 
 
 class Figure2D:
@@ -62,23 +61,16 @@ class Point2D(Figure2D):
 
     def mirror_line(self, line) -> "Point2D":
         """Отражает фигуру относительно прямой"""
-        direction_vector = Point2D(line.p2.x - line.p1.x,
-                                   line.p2.y - line.p1.y)
-
-        point_vector = Point2D(self.x - line.p1.x,
-                               self.y - line.p1.y)
-
-        projection = (point_vector.x * direction_vector.y
-                      + point_vector.y * direction_vector.y) / \
-                     (direction_vector.x ** 2 + direction_vector.y ** 2)
-
-        ref = Point2D(2 * projection * direction_vector.x - point_vector.x,
-                      2 * projection * direction_vector.y - point_vector.y)
-
-        ref_x = line.p1.x + ref.x
-        ref_y = line.p1.y + ref.y
-
-        return Point2D(ref_x, ref_y)
+        p_0 = [self.x, self.y]
+        a = line.p1.y - line.p2.y
+        b = line.p2.x - line.p1.x
+        c = - (a * line.p1.x + b * line.p1.y)
+        term1 = b ** 2 - a ** 2
+        term2 = -2 * a * b
+        term3 = -2 * a * b
+        term4 = a ** 2 - b ** 2
+        return Point2D((term1 * p_0[0] + term2 * p_0[1] - 2 * c * a) / (a ** 2 + b ** 2),
+                       (term3 * p_0[0] + term4 * p_0[1] - 2 * c * b) / (a ** 2 + b ** 2))
 
     def belongs_point(self, point) -> bool:
         """Проверяет на принадлежность точки к фигуре"""
@@ -121,16 +113,14 @@ class Segment2D(Figure2D):
 
     def belongs_point(self, point: Point2D) -> bool:
         """Проверяет на принадлежность точки к фигуре"""
-        x1, y1 = self.p1
-        x2, y2 = self.p2
-        x0, y0 = point
-        if x1 == x2:
-            return min(y1, y2) <= y0 <= max(y1, y2)
-        else:
-            a = y1 - y2
-            b = x2 - x1
-            c = x1 * y2 - x2 * y1
-            return abs(a * x0 + b * y0 + c) < 1e-6
+        m = (self.p2.y - self.p1.y) / (self.p2.x - self.p1.x)
+        b = self.p1.y - m * self.p1.x
+        if abs(point.y - (m * point.x + b)) > 1e-6:
+            return False
+        dot_product = (point.x - self.p1.x) * (self.p2.x - self.p1.x) + (point.y - self.p1.y) * (self.p2.y - self.p1.y)
+        if dot_product < 0 or dot_product > (self.p2.x - self.p1.x)**2 + (self.p2.y - self.p1.y)**2:
+            return False
+        return True
 
 
 class Triangle2D(Figure2D):
