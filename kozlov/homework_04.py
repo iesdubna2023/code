@@ -3,7 +3,7 @@ import os.path
 
 
 def ll2dict(lists):
-    return { l[1]: l[0] for l in (lists) if len(l) > 1 }
+    return {lst[1]: lst[0] for lst in (lists) if len(lst) > 1}
 
 
 class Student:
@@ -13,19 +13,21 @@ class Student:
         self.major_subject = major_subject
 
     def print(self):
-        print(f"Name: {self.first_name} Surname: {self.second_name} Major: {self.major_subject}")
+        print(f"Name: {self.first_name}", end=' ')
+        print(f"Surname: {self.second_name}", end=' ')
+        print(f"Major: {self.major_subject}")
 
 
 def print_student(*args):
-  if isinstance(args[0], Student):
-    args[0].print()
-  else:
-    first_name = args[0]
-    second_name = args[1]
-    major_subject = args[2] if len(args) > 2 else "engineering"
-    student = Student(first_name, second_name, major_subject)
-    student.print()
-
+    if isinstance(args[0], Student):
+        args[0].print()
+    else:
+        first_name = args[0]
+        second_name = args[1]
+        major_subject = args[2] if len(args) > 2 else "engineering"
+        student = Student(first_name, second_name, major_subject)
+        student.print()
+        
 
 class Busket():
     def __init__(self):
@@ -57,7 +59,7 @@ class Item():
     def __init__(self, name, price):
         self.name = name
         self.price = price
-        
+
 
 class DB():
     def __init__(self, filename):
@@ -72,7 +74,7 @@ class DB():
 
     def __enter__(self):
         return self
-    
+
     def __exit__(self, exc_type, exc_value, traceback):
         with open(self.filename, 'w') as f:
             f.write(json.dumps(self.data))
@@ -82,7 +84,7 @@ class DB():
 
     def get(self, key):
         return self.data[key]
-        
+
     def set(self, key, value):
         self.data[key] = value
 
