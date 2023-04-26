@@ -27,7 +27,7 @@ def print_student(*args):
         major_subject = args[2] if len(args) > 2 else "engineering"
         student = Student(first_name, second_name, major_subject)
         student.print()
-        
+
 
 class Busket():
     def __init__(self):
