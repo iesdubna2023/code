@@ -32,7 +32,7 @@ class Studend:
         print(f"Name: {self.first_name} Surname: {self.second_name} Major: {self.major_subject}")
 ```
 
-- Реализовать классы `Item` и `Busket` (товар и корзина для супермаркета). Нужно, чтобы можно было этими классами пользоваться вот так
+1. Реализовать классы `Item` и `Busket` (товар и корзина для супермаркета). Нужно, чтобы можно было этими классами пользоваться вот так
 ```python
 busket = Busket()
 tomato = Item("tomato", 1.55)
