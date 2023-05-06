@@ -15,7 +15,9 @@ class Student:
         self.major_subject = major_subject
 
     def print(self):
-        print(f"Name: {self.first_name} Surname: {self.second_name} Major: {self.major_subject}")
+        print(f"Name: {self.first_name} Surname: "
+              f"{self.second_name} Major: "
+              f"{self.major_subject}")
 
 
 def ll2dict(lst_: list):
@@ -71,9 +73,10 @@ class Busket:
         return self
 
     def __str__(self):
-        return " ".join([f"{key}: {value}" for item in self.__items
+        return " ".join([f"{key}: {value}"
+                         for item in self.__items
                          for key, value in item.item_value.items()]) + \
-               f" Total {sum([v for i in self.__items for k, v in i.item_value.items()])}"
+    f" Total {sum([v for i in self.__items for k, v in i.item_value.items()])}"
 
     def __contains__(self, item):
         return item in self.__items
@@ -113,7 +116,7 @@ class DB:
         file_path = Path(path)
         if file_path.exists() and file_path.suffix == ".json":
             return file_path
-        raise FileNotFoundError("Данный файл не найден. Возможно стоит его создать.")
+        raise FileNotFoundError("Данный файл не найден.")
 
     def list(self) -> list:
         """список доступных ключуй"""
