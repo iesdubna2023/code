@@ -12,9 +12,9 @@ class Student:
         self.major_subject = major_subject
 
     def print(self):
-        print(f"Name: {self.first_name} \
-        Surname: {self.second_name} \
-        Major: {self.major_subject}")
+        print(f"Name: {self.first_name} "
+              f"Surname: {self.second_name} "
+              f"Major: {self.major_subject}")
 
 
 def print_student(first_name='', second_name='',
