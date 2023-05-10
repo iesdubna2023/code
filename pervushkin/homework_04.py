@@ -51,8 +51,8 @@ class Busket:
         total_price = sum(item.price for item in self.items)
         items_str = "\n".join(f"{item.name}: {item.price:.2f}"
                               for item in self.items)
-        return f"Items in the busket:\n{items_str}\n \
-        Total price: {total_price:.2f}"
+        return f"Items in the busket:\n{items_str}\n" \
+               f"Total price: {total_price:.2f}"
 
 
 class DB:
