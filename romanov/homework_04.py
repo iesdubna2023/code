@@ -32,8 +32,8 @@ class Item:
         self.name = name
         self.price = price
 
-    def __add__(self, item):
-        return [self, item]
+    def __eq__(self, other):
+        return self.name == other.name and self.price == other.price
 
 
 class Basket:
@@ -48,15 +48,18 @@ class Basket:
         copy = self.items.copy()
         self.items.clear()
         for i in copy:
-            if i.name == item.name and i.price == item.price:
-                break
+            if i.name == item:
+                continue
             self.items.append(i)
         return self
 
     def __str__(self):
         result = ""
+        summ = 0
         for i in self.items:
+            summ += i.price
             result += f"{i.name}: {i.price} "
+            result += f"Total: {summ}"
         return result
 
 
