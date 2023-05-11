@@ -12,10 +12,12 @@ class Student:
         self.major_subject = major_subject
 
     def print(self):
-        print(f"Name: {self.first_name} Surname: {self.second_name} Major: {self.major_subject}")
+        print(f"Name: {self.first_name} Surname: {self.second_name} "
+              f"Major: {self.major_subject}")
 
 
-def print_student(first_name='', second_name='', major_subject='engineering', student=None):
+def print_student(first_name='', second_name='', major_subject='engineering',
+                  student=None):
     if student is not None:
         student.print()
         return
@@ -46,8 +48,11 @@ class Busket:
 
     def __str__(self):
         total_price = sum(item.price for item in self.items)
-        items_str = "\n".join(f"{item.name}: {item.price:.2f}" for item in self.items)
-        return f"Items in the busket:\n{items_str}\nTotal price: {total_price:.2f}"
+        items_str = "\n".join(f"{item.name}: "
+                              f"{item.price:.2f}"
+                              for item in self.items)
+        return f"Items in the busket:\n{items_str}" \
+               f"\nTotal price: {total_price:.2f}"
 
 
 class DB:
@@ -88,7 +93,6 @@ def mayonnaise(func):
     def wrapper(what):
         print("mayonnaise")
         func(what)
-        return func
     return wrapper
 
 
