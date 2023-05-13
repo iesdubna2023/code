@@ -1,10 +1,13 @@
+import functools
+
+
 class MyDefaultDict(dict):
     def __init__(self, default_factory=None, *args, **kwargs):
         if default_factory and not callable(default_factory):
             raise TypeError("first argument must be callable")
         super().__init__(*args, **kwargs)
         self.default_factory = default_factory
-    
+
     def __missing__(self, key):
         if self.default_factory is not None:
             self[key] = self.default_factory()
@@ -13,28 +16,24 @@ class MyDefaultDict(dict):
             raise KeyError(key)
 
 
-import functools
+class MyCache:
+    def __init__(self, func):
+        self.func = func
+        self.cache = {}
 
-def my_cache(func):
-    results = {}
-    @functools.wraps(func)
-    def wrapper(*args, **kwargs):
-        key = args + tuple(sorted(kwargs.items()))
-        if key in results:
-            return results[key]
+    def __call__(self, *args):
+        if args in self.cache:
+            return self.cache[args]
         else:
-            result = func(*args, **kwargs)
-            results[key] = result
-            return result
-    return wrapper
+            value = self.func(*args)
+            self.cache[args] = value
+            return value
+
+    def __get__(self, instance, owner):
+        return functools.partial(self, instance)
 
 
-import functools
-
-def my_partial(func, *args, **kwargs):
-    @functools.wraps(func)
+def partial(func, *args, **kwargs):
     def wrapper(*args2, **kwargs2):
-        all_args = args + args2
-        all_kwargs = {**kwargs, **kwargs2}
-        return func(*all_args, **all_kwargs)
-    return wrapper
+        return func(*args, *args2, **kwargs, **kwargs2)
+    return functools.update_wrapper(wrapper, func)
