@@ -12,10 +12,12 @@ class Student:
         self.major_subject = major_subject
 
     def p(self):
-        print(f"Name: {self.first_name} Surname: {self.second_name} Major: {self.major_subject}")
+        print(f"Name: {self.first_name} Surname: "
+              f"{self.second_name} Major: {self.major_subject}")
 
 
-def print_student(first_name='', second_name='', major_subject='engineering', student=None):
+def print_student(first_name='', second_name='',
+                  major_subject='engineering', student=None):
     if student is not None:
         student.p()
         return
